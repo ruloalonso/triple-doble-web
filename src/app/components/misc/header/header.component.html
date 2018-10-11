@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+  <div class="container">
+    <a class="navbar-brand" href="javascript:;">Triple Doble</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/leagues']">Home</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="!user">
+          <a class="nav-link" [routerLink]="['/login']">Login</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav my-2 my-lg-0" *ngIf="user">
+        <li class="nav-item">
+          <a class="nav-link">Random Manager</a></li>
+        <li class="nav-item" routerLinkActive="active">
+          <button class="btn btn-link" (click)="onClickLogout()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
