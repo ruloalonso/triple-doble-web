@@ -10,6 +10,8 @@ import { HeaderComponent } from './components/misc/header/header.component';
 import { LoginComponent } from './components/misc/login/login.component';
 
 import { routes } from './app.routes';
+import { LeagueListComponent } from './components/league/league-list/league-list.component';
+import { LeagueItemComponent } from './components/league/league-item/league-item.component';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { routes } from './app.routes';
     AppComponent,
     HeaderComponent,
     LoginComponent,
+    LeagueListComponent,
+    LeagueItemComponent,
   ],
   imports: [
     BrowserModule,
