@@ -20,7 +20,6 @@ export class DraftLobbyComponent implements OnInit {
     private leagueService: LeagueService) { }
 
   ngOnInit() {
-    console.log(this.route.params);
     this.route.params.subscribe(params => {
       this.leagueId = params.leagueId;
     })
@@ -31,7 +30,6 @@ export class DraftLobbyComponent implements OnInit {
   }
 
   startDraft(): void {
-    console.log('hola')
     this.router.navigate(['/leagues', this.leagueId, 'draft']);
   }
 
