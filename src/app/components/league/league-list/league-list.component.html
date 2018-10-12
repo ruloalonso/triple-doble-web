@@ -1,6 +1,13 @@
-<div class="container">
-  <div class="card-group mt-5">
-      <button (click)="createLeague()">Create League</button>
-    <app-league-item *ngFor="let league of leagues" [league]="league"></app-league-item>
-  </div>
+
+<button (click)="createLeague()">Create League</button>
+
+<div>
+  <h1>Your leagues</h1>
+  <app-league-item *ngFor="let league of userLeagues" [league]="league"></app-league-item>
+  <p *ngIf="userLeagues.length === 0">You must Create or Join a league!</p>
+</div>
+
+<div *ngIf="otherLeagues.length > 0">
+  <h1>Other leagues</h1>
+  <app-league-item *ngFor="let league of otherLeagues" [league]="league"></app-league-item>
 </div>
