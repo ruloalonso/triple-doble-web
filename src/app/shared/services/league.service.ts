@@ -42,19 +42,26 @@ export class LeagueService extends BaseApiService {
         catchError(this.handleError));
   }
 
-  // join(id: string): Observable<Array<League> | ApiError> {
-  //   return this.http.post<Array<League>>(`${LeagueService.LEAGUE_API}/${id}/join`, BaseApiService.defaultOptions)
-  //     .pipe(
-  //       map((league: League) => {
-  //         this.leagues.forEach(league => {
-  //           if (league._id = id) {
-  //             league.users.push(this.sessionService.user.id);
-  //           };
-  //         })
-  //       }),
-  //       catchError(this.handleError)
-  //     );
-  // }
+  join(id: string): Observable<League | ApiError> {
+    return this.http.post<League>(`${LeagueService.LEAGUE_API}/${id}/join`, BaseApiService.defaultOptions, { withCredentials: true })
+      .pipe(
+        map((league: League) => {
+          console.log('joining league!!');
+          console.log(league);
+          this.leagues.map(league => {
+            if (league._id === id) {
+              league.users.push(this.sessionService.user.id);
+            }
+            return league;
+          });
+          this.notifyLeaguesChanges();
+          return league;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+
 
   create(): Observable<League | ApiError> {
     return this.http.post<League>(LeagueService.LEAGUE_API, BaseApiService.defaultOptions, { withCredentials: true })

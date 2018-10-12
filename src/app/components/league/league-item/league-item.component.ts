@@ -1,6 +1,8 @@
 import { League } from './../../../shared/models/league.model';
 import { Component, OnInit , Input} from '@angular/core';
 import { SessionService } from 'src/app/shared/services/session.service';
+import { LeagueService } from 'src/app/shared/services/league.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-league-item',
@@ -10,11 +12,22 @@ import { SessionService } from 'src/app/shared/services/session.service';
 export class LeagueItemComponent implements OnInit {
   @Input() league: League = new League();
 
-  constructor(private sessionService: SessionService) { }
+  constructor(
+    private sessionService: SessionService,
+    private leagueService: LeagueService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     // console.log(this.league);
     // console.log(this.sessionService.user)
+  }
+
+  joinLeague(): void {
+    this.leagueService.join(this.league._id)
+      .subscribe(league => {
+        this.router.navigate(['/leagues']);
+      });
   }
 
   isAdmin(): boolean {
