@@ -14,7 +14,7 @@ export class LeagueService extends BaseApiService {
   private static readonly LEAGUE_API = `${BaseApiService.BASE_API}/leagues`;
 
   leagues: Array<League> = [];
-  private leaguesSubject: Subject<Array<League>> = new Subject();
+  leaguesSubject: Subject<Array<League>> = new Subject();
 
   constructor(
     private http: HttpClient,
@@ -26,6 +26,9 @@ export class LeagueService extends BaseApiService {
     return this.http.get<Array<League>>(LeagueService.LEAGUE_API, BaseApiService.defaultOptions)
       .pipe(
         map((leagues: Array<League>) => {
+          leagues = leagues.map(league => Object.assign(new League(), league));
+          this.leagues = leagues;
+          this.notifyLeaguesChanges();
           return leagues;
         }),
         catchError(this.handleError)
@@ -39,20 +42,26 @@ export class LeagueService extends BaseApiService {
         catchError(this.handleError));
   }
 
-  join(id: string): Observable<Array<League> | ApiError> {
-    return this.http.post<Array<League>>(`${LeagueService.LEAGUE_API}/${id}`, BaseApiService.defaultOptions)
-      .pipe(
-        map((leagues: Array<League>) => {
-          return leagues;
-        }),
-        catchError(this.handleError)
-      );
-  }
+  // join(id: string): Observable<Array<League> | ApiError> {
+  //   return this.http.post<Array<League>>(`${LeagueService.LEAGUE_API}/${id}/join`, BaseApiService.defaultOptions)
+  //     .pipe(
+  //       map((league: League) => {
+  //         this.leagues.forEach(league => {
+  //           if (league._id = id) {
+  //             league.users.push(this.sessionService.user.id);
+  //           };
+  //         })
+  //       }),
+  //       catchError(this.handleError)
+  //     );
+  // }
 
   create(): Observable<League | ApiError> {
     return this.http.post<League>(LeagueService.LEAGUE_API, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(
         map((league: League) => {
+          console.log('pushing league');
+          console.log(league);
           this.leagues.push(league);
           this.notifyLeaguesChanges();
           return league;
@@ -63,5 +72,10 @@ export class LeagueService extends BaseApiService {
 
   private notifyLeaguesChanges(): void {
     this.leaguesSubject.next(this.leagues);
+  }
+
+  onLeaguesChanges(): Observable<Array<League>> {
+    console.log('onLeagueChanges(): Observable');
+    return this.leaguesSubject.asObservable();
   }
 }

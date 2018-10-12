@@ -14,6 +14,7 @@ export const routes: Routes = [
   { path: 'signup', component: RegisterComponent },
   { path: 'leagues', canActivate: [IsAuthenticatedGuard], component: LeagueListComponent },
   { path: 'leagues/:leagueId', canActivate: [IsAuthenticatedGuard], component: LeagueHomeComponent },
-  { path: 'leagues/:leagueId/lobby', canActivate: [IsAuthenticatedGuard], canDeactivate: [CanLeaveDraftLobbyGuard], component: DraftLobbyComponent },
+  { path: 'leagues/:leagueId/lobby', canActivate: [IsAuthenticatedGuard],
+    /* canDeactivate: [CanLeaveDraftLobbyGuard], */ component: DraftLobbyComponent },
   { path: 'leagues/:leagueId/draft', canActivate: [IsAuthenticatedGuard], component: DraftRoomComponent }
 ];

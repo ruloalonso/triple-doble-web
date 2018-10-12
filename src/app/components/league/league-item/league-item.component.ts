@@ -21,8 +21,20 @@ export class LeagueItemComponent implements OnInit {
     return this.sessionService.user.id === this.league.admin;
   }
 
+  isUser(): boolean {
+    return this.league.users.includes(this.sessionService.user.id);
+  }
+
+  isApplication(): boolean {
+    return this.league.status === 'application'
+  }
+
   isDraft(): boolean {
-    return (this.league.status === 'application' || this.league.status === 'draft')
+    return this.league.status === 'draft'
+  }
+
+  isSeason(): boolean {
+    return this.league.status === 'season'
   }
 
 }

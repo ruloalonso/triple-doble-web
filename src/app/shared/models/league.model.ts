@@ -1,4 +1,5 @@
 export class League {
+  _id: string;
   admin: string;
   users: [string];
   status: string;

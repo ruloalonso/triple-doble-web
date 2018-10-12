@@ -21,7 +21,7 @@ export class SessionService extends BaseApiService {
     super();
     const userData = localStorage.getItem(SessionService.CURRENT_USER_KEY);
     if (userData) {
-      this.user = Object.assign(new User(), userData);
+      this.user = Object.assign(new User(), JSON.parse(userData));
     }
     this.notifyUserChanges();
   }

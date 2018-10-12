@@ -1,7 +1,8 @@
 import { LeagueService, } from './../../../shared/services/league.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { League } from '../../../shared/models/league.model';
 import { SessionService } from 'src/app/shared/services/session.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-league-list',
@@ -11,6 +12,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 export class LeagueListComponent implements OnInit {
   userLeagues: Array<League> = [];
   otherLeagues: Array<League> = [];
+  onLeagueChanges: Subscription;
 
   constructor(
     private leagueService: LeagueService,
@@ -20,11 +22,23 @@ export class LeagueListComponent implements OnInit {
     this.leagueService.list()
       .subscribe(
         (leagues: Array<League>) => {
+          console.log(leagues);
           this.userLeagues = leagues.filter(league => league.users.includes(this.sessionService.user.id));
           this.otherLeagues = leagues.filter(league => !league.users.includes(this.sessionService.user.id));
         }
       );
+    this.onLeagueChanges = this.leagueService.onLeaguesChanges()
+      .subscribe((leagues: Array<League>) => {
+        this.userLeagues = leagues.filter(league => league.users.includes(this.sessionService.user.id));
+        this.otherLeagues = leagues.filter(league => !league.users.includes(this.sessionService.user.id));
+        console.log('onLeagueChanges: Subscription!!!');
+      });
   }
+
+  ngOnDestroy(): void {
+    this.onLeagueChanges.unsubscribe();
+  }
+
   createLeague() {
     this.leagueService.create()
       .subscribe(
