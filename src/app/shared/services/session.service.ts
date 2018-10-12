@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
+import { League } from '../models/league.model';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,12 @@ export class SessionService extends BaseApiService {
     this.user = null;
     localStorage.removeItem(SessionService.CURRENT_USER_KEY);
     this.notifyUserChanges();
+  }
+
+  isLeagueAdmin(league: League): any {
+    console.log(league);
+    console.log(this.user);
+    league.users.includes(this.user.id)
   }
 
 }

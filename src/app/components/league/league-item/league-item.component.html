@@ -1,2 +1,5 @@
-<h1>League Id: {{league._id}}</h1>
+<h3>League Id: {{league._id}}</h3>
+<p>League Comissioner: {{league.admin}}</p>
+<p>League Status: {{league.status}}</p>
 <button (click)="joinLeague()">Join League</button>
+<button *ngIf="isDraft()">Enter Draft lobby</button>

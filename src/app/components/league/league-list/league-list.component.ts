@@ -15,9 +15,8 @@ export class LeagueListComponent implements OnInit {
   ngOnInit() {
     this.leagueService.list()
       .subscribe(
-        (leagues: League[]) => {
+        (leagues: Array<League>) => {
           this.leagues = leagues;
-          console.log(this.leagues);
         }
       );
   }
