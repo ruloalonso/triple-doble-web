@@ -69,10 +69,4 @@ export class SessionService extends BaseApiService {
     this.notifyUserChanges();
   }
 
-  isLeagueAdmin(league: League): any {
-    console.log(league);
-    console.log(this.user);
-    league.users.includes(this.user.id)
-  }
-
 }

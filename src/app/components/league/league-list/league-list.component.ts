@@ -22,14 +22,15 @@ export class LeagueListComponent implements OnInit {
         (leagues: Array<League>) => {
           this.userLeagues = leagues.filter(league => league.users.includes(this.sessionService.user.id));
           this.otherLeagues = leagues.filter(league => !league.users.includes(this.sessionService.user.id));
-          console.log(this.sessionService.user);
-          console.log(leagues);
         }
       );
   }
-
   createLeague() {
-    
+    this.leagueService.create()
+      .subscribe(
+        () => {
+          console.log('done');
+        }
+      );
   }
-
 }

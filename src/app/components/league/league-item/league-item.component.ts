@@ -17,9 +17,8 @@ export class LeagueItemComponent implements OnInit {
     // console.log(this.sessionService.user)
   }
 
-  isUser(): boolean {
-    this.sessionService.isLeagueAdmin(this.league);
-    return false;
+  isAdmin(): boolean {
+    return this.sessionService.user.id === this.league.admin;
   }
 
   isDraft(): boolean {

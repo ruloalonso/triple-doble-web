@@ -1,10 +1,13 @@
-<h3>League Id: {{league._id}}</h3>
+<h4>League Id: {{league._id}}</h4>
 <ul>
-  <li><p>League Comissioner: {{league.admin}}</p></li>
-  <li><p>League Status: {{league.status}}</p></li>
+  <li *ngIf="isAdmin()"><p>Comissioner: YOU</p></li>
+  <li *ngIf="!isAdmin()"><p>Comissioner: {{league.admin}}</p></li>
+  <li><p>Users: {{league.maxUsers - league.users.length}} left to start the Draft</p></li>
+  <li><p>Status: {{league.status}}</p></li>
   <li><button (click)="joinLeague()">Join League</button></li>
-  <li><a [routerLink]="['/leagues', league._id, 'lobby']">Enter Draft lobby</a></li>
-  <li><a [routerLink]="['/leagues', league._id]">Enter League</a></li>
+  <li><a [routerLink]="['/leagues', league._id, 'lobby']">Draft Lobby</a></li>
+  <li><a [routerLink]="['/leagues', league._id, 'draft']">Draft Room</a></li>
+  <li><a [routerLink]="['/leagues', league._id, 'season']">Season</a></li>  
 </ul>
 
 

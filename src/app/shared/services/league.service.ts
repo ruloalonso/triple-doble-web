@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { BaseApiService } from './base-api.service';
 import { HttpClient } from '@angular/common/http';
 import { League } from '../models/league.model';
-import { Observable,} from 'rxjs';
+import { Observable, Subject,} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { SessionService } from './session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,11 @@ export class LeagueService extends BaseApiService {
   private static readonly LEAGUE_API = `${BaseApiService.BASE_API}/leagues`;
 
   leagues: Array<League> = [];
+  private leaguesSubject: Subject<Array<League>> = new Subject();
 
-  constructor(private http: HttpClient) { 
+  constructor(
+    private http: HttpClient,
+    private sessionService: SessionService) { 
     super();
   }
 
@@ -43,5 +47,21 @@ export class LeagueService extends BaseApiService {
         }),
         catchError(this.handleError)
       );
+  }
+
+  create(): Observable<League | ApiError> {
+    return this.http.post<League>(LeagueService.LEAGUE_API, BaseApiService.defaultOptions, { withCredentials: true })
+      .pipe(
+        map((league: League) => {
+          this.leagues.push(league);
+          this.notifyLeaguesChanges();
+          return league;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  private notifyLeaguesChanges(): void {
+    this.leaguesSubject.next(this.leagues);
   }
 }

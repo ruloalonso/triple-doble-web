@@ -1,13 +1,14 @@
 
-<button (click)="createLeague()">Create League</button>
-
 <div>
-  <h1>Your leagues</h1>
+  <h2>Your are playing {{userLeagues.length}} leagues</h2>
   <app-league-item *ngFor="let league of userLeagues" [league]="league"></app-league-item>
-  <p *ngIf="userLeagues.length === 0">You must Create or Join a league!</p>
+  <div *ngIf="userLeagues.length === 0">
+    <p>You must Create or Join a league to start playing!</p>
+    <button (click)="createLeague()">Create League</button>
+  </div>
 </div>
 
 <div *ngIf="otherLeagues.length > 0">
-  <h1>Other leagues</h1>
+  <h2>Other leagues: {{otherLeagues.length}}</h2>
   <app-league-item *ngFor="let league of otherLeagues" [league]="league"></app-league-item>
 </div>
