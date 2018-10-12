@@ -12,6 +12,8 @@ import { LoginComponent } from './components/misc/login/login.component';
 import { routes } from './app.routes';
 import { LeagueListComponent } from './components/league/league-list/league-list.component';
 import { LeagueItemComponent } from './components/league/league-item/league-item.component';
+import { DraftLobbyComponent } from './components/draft/draft-lobby/draft-lobby.component';
+import { LeagueHomeComponent } from './components/league/league-home/league-home.component';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { LeagueItemComponent } from './components/league/league-item/league-item
     LoginComponent,
     LeagueListComponent,
     LeagueItemComponent,
+    DraftLobbyComponent,
+    LeagueHomeComponent,
   ],
   imports: [
     BrowserModule,
