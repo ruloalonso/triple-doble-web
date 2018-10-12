@@ -27,4 +27,14 @@ export class LeagueService extends BaseApiService {
         catchError(this.handleError)
       );
   }
+
+  join(id: string): Observable<Array<League> | ApiError> {
+    return this.http.post<Array<League>>(`${LeagueService.SESSIONS_API}/${id}`, BaseApiService.defaultOptions)
+      .pipe(
+        map((leagues: Array<League>) => {
+          return leagues;
+        }),
+        catchError(this.handleError)
+      );
+  }
 }
