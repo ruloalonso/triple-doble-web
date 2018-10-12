@@ -5,12 +5,13 @@ import { LeagueListComponent } from './components/league/league-list/league-list
 import { Routes } from '@angular/router';
 import { DraftLobbyComponent } from './components/draft/draft-lobby/draft-lobby.component';
 import { LeagueHomeComponent } from './components/league/league-home/league-home.component';
-
+import { DraftRoomComponent } from './components/draft/draft-room/draft-room.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'leagues', component: LeagueListComponent },
-  { path: 'leagues/:id', canActivate: [IsAuthenticatedGuard], component: LeagueHomeComponent }
-  { path: 'leagues/:id/draft', canActivate: [IsAuthenticatedGuard], canDeactivate: [CanLeaveDraftLobbyGuard], component: DraftLobbyComponent },
+  { path: 'leagues/:leagueId', canActivate: [IsAuthenticatedGuard], component: LeagueHomeComponent },
+  { path: 'leagues/:leagueId/lobby', canActivate: [IsAuthenticatedGuard], canDeactivate: [CanLeaveDraftLobbyGuard], component: DraftLobbyComponent },
+  { path: 'leagues/:leagueId/draft', canActivate: [IsAuthenticatedGuard], component: DraftRoomComponent }
 ];

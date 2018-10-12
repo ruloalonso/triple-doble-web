@@ -10,7 +10,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LeagueService extends BaseApiService {
-  private static readonly SESSIONS_API = `${BaseApiService.BASE_API}/leagues`;
+  private static readonly LEAGUE_API = `${BaseApiService.BASE_API}/leagues`;
 
   leagues: Array<League> = [];
 
@@ -19,7 +19,7 @@ export class LeagueService extends BaseApiService {
   }
 
   list(): Observable<Array<League> | ApiError> {
-    return this.http.get<Array<League>>(LeagueService.SESSIONS_API, BaseApiService.defaultOptions)
+    return this.http.get<Array<League>>(LeagueService.LEAGUE_API, BaseApiService.defaultOptions)
       .pipe(
         map((leagues: Array<League>) => {
           return leagues;
@@ -28,8 +28,15 @@ export class LeagueService extends BaseApiService {
       );
   }
 
+  get(id: string): Observable<League | ApiError> {
+    return this.http.get<League>(`${LeagueService.LEAGUE_API}/${id}`, BaseApiService.defaultOptions)
+      .pipe(
+        map((league: League) => Object.assign(new League(), league)),
+        catchError(this.handleError));
+  }
+
   join(id: string): Observable<Array<League> | ApiError> {
-    return this.http.post<Array<League>>(`${LeagueService.SESSIONS_API}/${id}`, BaseApiService.defaultOptions)
+    return this.http.post<Array<League>>(`${LeagueService.LEAGUE_API}/${id}`, BaseApiService.defaultOptions)
       .pipe(
         map((leagues: Array<League>) => {
           return leagues;

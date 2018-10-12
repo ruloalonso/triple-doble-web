@@ -14,6 +14,7 @@ import { LeagueListComponent } from './components/league/league-list/league-list
 import { LeagueItemComponent } from './components/league/league-item/league-item.component';
 import { DraftLobbyComponent } from './components/draft/draft-lobby/draft-lobby.component';
 import { LeagueHomeComponent } from './components/league/league-home/league-home.component';
+import { DraftRoomComponent } from './components/draft/draft-room/draft-room.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { LeagueHomeComponent } from './components/league/league-home/league-home
     LeagueItemComponent,
     DraftLobbyComponent,
     LeagueHomeComponent,
+    DraftRoomComponent,
   ],
   imports: [
     BrowserModule,

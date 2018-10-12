@@ -3,7 +3,7 @@
   <li><p>League Comissioner: {{league.admin}}</p></li>
   <li><p>League Status: {{league.status}}</p></li>
   <li><button (click)="joinLeague()">Join League</button></li>
-  <li><a [routerLink]="['/leagues', league._id, 'draft']">Enter Draft lobby</a></li>
+  <li><a [routerLink]="['/leagues', league._id, 'lobby']">Enter Draft lobby</a></li>
   <li><a [routerLink]="['/leagues', league._id]">Enter League</a></li>
 </ul>
 
