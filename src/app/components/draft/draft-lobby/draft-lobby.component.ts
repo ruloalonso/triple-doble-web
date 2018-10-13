@@ -1,18 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LeagueService } from 'src/app/shared/services/league.service';
 import { League } from 'src/app/shared/models/league.model';
 import { ApiError } from 'src/app/shared/models/api-error.model';
 import { SessionService } from 'src/app/shared/services/session.service';
+import { interval } from "rxjs/internal/observable/interval";
+import { switchMap, startWith } from "rxjs/operators";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-draft-lobby',
   templateUrl: './draft-lobby.component.html',
   styleUrls: ['./draft-lobby.component.css']
 })
-export class DraftLobbyComponent implements OnInit {
+export class DraftLobbyComponent implements OnInit, OnDestroy {
+  private static readonly POLLING_INTERVAL = 2000;
   league: League = new League();
   leagueId: string;
+  pollingIntervalSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -23,9 +28,24 @@ export class DraftLobbyComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.leagueId = params.leagueId;
-      this.leagueService.get(this.leagueId)
-        .subscribe((newLeague: League) => this.league = newLeague);
+
+      this.pollingIntervalSubscription = interval(DraftLobbyComponent.POLLING_INTERVAL)
+        .pipe(
+          startWith(0),
+          switchMap(() => this.leagueService.get(this.leagueId))
+        )
+        .subscribe((league: League) => {
+          this.league = league;
+          if (!this.isWaiting()) {
+            console.log("NONE");
+            this.pollingIntervalSubscription.unsubscribe();
+          }
+        });
     });
+  }
+
+  ngOnDestroy() {
+    this.pollingIntervalSubscription.unsubscribe();
   }
 
   canDeactivate(): boolean {
