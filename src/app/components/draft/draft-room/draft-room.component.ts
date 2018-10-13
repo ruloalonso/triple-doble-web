@@ -16,10 +16,10 @@ export class DraftRoomComponent implements OnInit {
   league: League = new League();
   leagueId: string;
   players: Array<Player> = [];
-  onPlayersChanges: Subscription;
+  onAvailablePlayersChanges: Subscription;
   onLeagueChanges: Subscription;
 
-  selectedPlayerId: any;
+  selectedPlayer: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,11 +33,11 @@ export class DraftRoomComponent implements OnInit {
       .subscribe((newLeague: League) => {
         this.league = newLeague;
       });
-    this.playerService.list()
+    this.playerService.listAvailable()
       .subscribe((players: Array<Player>) => {
         this.players = players;
       });
-    this.onPlayersChanges = this.playerService.onPlayersChanges()
+    this.onAvailablePlayersChanges = this.playerService.onPlayersChanges()
       .subscribe((players: Array<Player>) => {
         this.players = players;
       });
@@ -59,9 +59,12 @@ export class DraftRoomComponent implements OnInit {
     return this.turn() === this.sessionService.user.id;
   }
 
-  pickPlayer(id: string) {
-    console.log(id);
-    this.passTurn();
+  pickPlayer() {
+    this.playerService.sign(this.selectedPlayer)
+      .subscribe(players => {
+        console.log(players);
+        this.passTurn();
+      });   
   }
 
   passTurn() {
@@ -76,6 +79,10 @@ export class DraftRoomComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.onLeagueChanges.unsubscribe();
+  }
+
+  selectChange(): void {
+    console.log(this.selectedPlayer);
   }
 
 }

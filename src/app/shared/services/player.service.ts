@@ -1,7 +1,7 @@
 import { ApiError } from '../models/api-error.model';
 import { Injectable } from '@angular/core';
 import { BaseApiService } from './base-api.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { League } from '../models/league.model';
 import { Observable, Subject} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -16,6 +16,9 @@ export class PlayerService extends BaseApiService {
 
   players: Array<Player> = [];
   playersSubject: Subject<Array<Player>> = new Subject();
+  
+  availablePlayers: Array<Player> = [];
+  availablePlayersSubject: Subject<Array<Player>> = new Subject();
 
   constructor(
     private http: HttpClient,
@@ -30,6 +33,21 @@ export class PlayerService extends BaseApiService {
           players = players.map(league => Object.assign(new Player(), league));
           this.players = players;
           this.notifyPlayersChanges();
+          return players;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  listAvailable(): Observable<Array<Player> | ApiError> {
+    let params = new HttpParams();
+    params = params.append('available', 'true')
+    return this.http.get<Array<Player>>(`${PlayerService.PLAYER_API}/?available=true`, BaseApiService.defaultOptions)
+      .pipe(
+        map((players: Array<Player>) => {
+          players = players.map(league => Object.assign(new Player(), league));
+          this.availablePlayers = players;
+          this.notifyAvailablePlayersChanges();
           return players;
         }),
         catchError(this.handleError)
@@ -53,6 +71,7 @@ export class PlayerService extends BaseApiService {
             }
             return newPlayer;
           });
+          console.log(this.players);
           this.notifyPlayersChanges();
           return player;
         }),
@@ -62,6 +81,10 @@ export class PlayerService extends BaseApiService {
 
   private notifyPlayersChanges(): void {
     this.playersSubject.next(this.players);
+  }
+
+  private notifyAvailablePlayersChanges(): void {
+    this.availablePlayersSubject.next(this.players);
   }
 
   onPlayersChanges(): Observable<Array<Player>> {

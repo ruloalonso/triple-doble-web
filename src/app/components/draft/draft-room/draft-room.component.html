@@ -2,19 +2,20 @@
 
 <div *ngIf="!isSeason()">
   <ul>
-      <li>Round: {{league?.round}} of {{league?.maxPlayers}}</li>
-      <li >Turn {{league?.turn}} of {{league?.maxUsers}}</li>
-      <li *ngIf="!userTurn()"> User Turn: {{turn()}}</li>
-      <li *ngIf="userTurn()">It's your turn!!!</li>
+      <li><p>Round #{{league?.round}} of {{league?.maxPlayers}}</p></li>
+      <li><p>Turn #{{league?.turn}} of {{league?.maxUsers}}</p></li>
+      <li *ngIf="!userTurn()"><p>User Turn: {{turn()}}</p></li>
+      <li *ngIf="!userTurn()"><p>Wait for your turn...</p></li>
+      <li *ngIf="userTurn()"><p>It's your turn!!!</p></li>
     </ul>
     
     <div *ngIf="userTurn()">
-        <span>Select Player: </span>
-        <select>
-            <option *ngFor="let player of players" [value]="player.id">
-              {{player.firstName}} {{player.lastName}}
-            </option>
-        </select>
+      <span>Select Player: </span>
+      <select [(ngModel)]="selectedPlayer" (change)="selectChange()">
+        <option *ngFor="let player of players" [value]="player._id">
+          {{player.firstName}} {{player.lastName}} - {{player._id}}
+        </option>
+      </select>
       <button  (click)="pickPlayer()">Pick Player</button>
     </div>
 </div>

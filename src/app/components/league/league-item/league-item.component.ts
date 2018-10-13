@@ -50,4 +50,12 @@ export class LeagueItemComponent implements OnInit {
     return this.league.status === 'season'
   }
 
+  isTurn(): boolean {
+    return this.league.users[this.league.turn - 1] === this.sessionService.user.id;
+  }
+
+  userTurn(): string {
+    return this.league.users[this.league.turn - 1];
+  }
+
 }

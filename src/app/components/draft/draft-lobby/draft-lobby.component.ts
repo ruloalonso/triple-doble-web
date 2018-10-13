@@ -36,6 +36,10 @@ export class DraftLobbyComponent implements OnInit {
     return this.sessionService.user.id === this.league.admin;
   }
 
+  isWaiting(): boolean {
+    return (this.league.maxUsers - this.league.users.length) > 0;
+  }
+
   startDraft(): void {
     if (this.league.users.length === this.league.maxUsers) {
       console.log('start draft!');
