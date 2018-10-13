@@ -2,7 +2,6 @@ import { ApiError } from '../models/api-error.model';
 import { Injectable } from '@angular/core';
 import { BaseApiService } from './base-api.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { League } from '../models/league.model';
 import { Observable, Subject} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { SessionService } from './session.service';

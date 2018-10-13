@@ -1,5 +1,6 @@
-<ul>
-  <li><p>League: {{league._id}}</p></li>
+<h3>Draft Lobby of League: {{league.name}}</h3>
+
+<ul>  
   <li><p>League Comissioner: {{league.admin}}</p></li>
   <li *ngFor="let user of league.users; index as i"><p>User #{{i+1}}: {{user}}</p></li>
   <li *ngIf="isWaiting()"><p>{{league.maxUsers - league.users.length}} users remaining to start</p></li>

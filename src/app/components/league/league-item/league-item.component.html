@@ -1,4 +1,4 @@
-<h4>League Id: {{league._id}}</h4>
+<h4>League: {{league.name}}</h4>
 <ul>
   <li *ngIf="!isAdmin()"><p>Comissioner: {{league.admin}}</p></li>
   <li *ngIf="isAdmin()"><p>You are the commisioner!</p></li>

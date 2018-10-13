@@ -41,7 +41,6 @@ export class DraftLobbyComponent implements OnInit, OnDestroy {
           }
           console.log(league);
           if (league.status === "draft") {
-            console.log('draft time!');
             this.pollingIntervalSubscription.unsubscribe();
             this.router.navigate(['/leagues', league._id, 'draft']);
           }
