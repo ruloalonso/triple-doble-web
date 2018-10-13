@@ -1,12 +1,18 @@
+<h3>League: {{league._id}}</h3>
+
 <ul>
-  <li>Round: {{league?.round}}</li>
-  <li>Turn: {{league?.turn}}</li>
+  <li>Round: {{league?.round}} of {{league?.maxPlayers}}</li>
+  <li>Turn: {{league?.turn}} - User: {{turn()}}</li>
+  <li *ngIf="userTurn()">It's your turn!!!</li>
 </ul>
 
+<span>Select Player: </span>
 <select>
   <option value="volvo">Lebron</option>
   <option value="saab">Curry</option>
 </select>
 
-<button>Pick Player</button>
-<button>End Draft</button>
+<div>
+  <button *ngIf="userTurn()">Pick Player</button>
+  <button *ngIf="league.round > league.maxPlayers">End Draft</button>
+</div>
