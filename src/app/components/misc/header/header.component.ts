@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
     this.onUserChanges = this.sessionService.onUserChanges()
       .subscribe((user: User) => {
         this.user = user;
-        console.log('User Changes!!!');
       });
   }
 

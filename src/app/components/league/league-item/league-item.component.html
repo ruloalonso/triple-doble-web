@@ -1,9 +1,9 @@
 <h4>League Id: {{league._id}}</h4>
 <ul>
+  <li><p>Status: {{league.status}}</p></li>
   <li *ngIf="isAdmin()"><p>You are the commisioner!</p></li>
   <li *ngIf="!isAdmin()"><p>Comissioner: {{league.admin}}</p></li>
-  <li><p>Users: {{league.maxUsers - league.users.length}} left to start the Draft</p></li>
-  <li><p>Status: {{league.status}}</p></li>
+  <li *ngIf="isApplication()"><p>{{league.maxUsers - league.users.length}} users left to start the Draft</p></li>
   <li *ngIf="!isUser()"><button (click)="joinLeague()">Join League</button></li>
   <li *ngIf="isUser() && isApplication()"><a [routerLink]="['/leagues', league._id, 'lobby']">Draft Lobby</a></li>
   <li *ngIf="isDraft()"><a [routerLink]="['/leagues', league._id, 'draft']">Draft Room</a></li>

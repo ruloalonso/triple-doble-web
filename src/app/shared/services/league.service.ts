@@ -46,8 +46,6 @@ export class LeagueService extends BaseApiService {
     return this.http.post<League>(`${LeagueService.LEAGUE_API}/${id}/join`, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(
         map((league: League) => {
-          console.log('joining league!!');
-          console.log(league);
           this.leagues.map(league => {
             if (league._id === id) {
               league.users.push(this.sessionService.user.id);
@@ -77,16 +75,11 @@ export class LeagueService extends BaseApiService {
     return this.http.post<League>(`${LeagueService.LEAGUE_API}/${id}/turn`, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(
         map((newLeague: League) => {
-          console.log(this.leagues[0]);
-          console.log(newLeague);
-          console.log(id);
           this.leagues.forEach((league, index) => {
             if (league._id === id) {
-              console.log('match!');
               this.leagues[index] = newLeague;
             }
           });
-          console.log(this.leagues);
           this.notifyLeaguesChanges();
           return newLeague;
         }),
@@ -116,7 +109,6 @@ export class LeagueService extends BaseApiService {
   }
 
   onLeaguesChanges(): Observable<Array<League>> {
-    console.log('onLeagueChanges(): Observable');
     return this.leaguesSubject.asObservable();
   }
 }

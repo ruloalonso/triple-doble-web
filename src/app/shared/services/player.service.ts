@@ -47,7 +47,6 @@ export class PlayerService extends BaseApiService {
     return this.http.post<Player>(`${PlayerService.PLAYER_API}/${id}/sign`, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(
         map((player: Player) => {
-          console.log(player);
           this.players.map(newPlayer => {
             if (newPlayer.id === id) {
               newPlayer.owner = this.sessionService.user.id;
@@ -66,7 +65,6 @@ export class PlayerService extends BaseApiService {
   }
 
   onPlayersChanges(): Observable<Array<Player>> {
-    console.log('onPlayerChanges(): Observable');
     return this.playersSubject.asObservable();
   }
 }
