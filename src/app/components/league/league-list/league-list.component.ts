@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LeagueService, } from './../../../shared/services/league.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { League } from '../../../shared/models/league.model';
@@ -16,7 +17,8 @@ export class LeagueListComponent implements OnInit {
 
   constructor(
     private leagueService: LeagueService,
-    private sessionService: SessionService) { }
+    private sessionService: SessionService,
+    private router: Router) { }
 
   ngOnInit() {
     this.leagueService.list()
@@ -40,8 +42,9 @@ export class LeagueListComponent implements OnInit {
   createLeague() {
     this.leagueService.create()
       .subscribe(
-        () => {
-          console.log('done');
+        (league: League) => {
+          console.log(league);
+          this.router.navigate([`/leagues/${league._id}/lobby`])
         }
       );
   }

@@ -1,8 +1,10 @@
 <ul>
+  <li><p>League: {{league._id}}</p></li>
   <li><p>League Comissioner: {{league.admin}}</p></li>
   <li *ngFor="let user of league.users; index as i"><p>User #{{i+1}}: {{user}}</p></li>
   <li *ngIf="isWaiting()"><p>{{league.maxUsers - league.users.length}} users remaining to start</p></li>
   <li *ngIf="isWaiting()"><p>Waiting for users to join the league...</p></li>
   <li *ngIf="!isWaiting()"><p>READY to start!!!</p></li>  
+  <li *ngIf="(league.users.length === league.maxUsers) && !isAdmin()"><p>Waiting for Commisioner to Start the Draft...</p></li> 
 </ul>
-<button *ngIf="league.users.length === league.maxUsers" (click)="startDraft()">Start draft</button>
+<button *ngIf="league.users.length === league.maxUsers && isAdmin()" (click)="startDraft()">Start Draft</button>

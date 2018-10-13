@@ -36,8 +36,14 @@ export class DraftLobbyComponent implements OnInit, OnDestroy {
         )
         .subscribe((league: League) => {
           this.league = league;
-          if (!this.isWaiting()) {
+          if (!this.isWaiting() && this.isAdmin()) {
             this.pollingIntervalSubscription.unsubscribe();
+          }
+          console.log(league);
+          if (league.status === "draft") {
+            console.log('draft time!');
+            this.pollingIntervalSubscription.unsubscribe();
+            this.router.navigate(['/leagues', league._id, 'draft']);
           }
         });
     });
@@ -61,7 +67,6 @@ export class DraftLobbyComponent implements OnInit, OnDestroy {
 
   startDraft(): void {
     if (this.league.users.length === this.league.maxUsers) {
-      console.log('start draft!');
       this.leagueService.startDraft(this.leagueId)
         .subscribe(league => {
           this.router.navigate(['/leagues', this.leagueId, 'draft']);

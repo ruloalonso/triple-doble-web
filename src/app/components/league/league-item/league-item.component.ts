@@ -26,7 +26,7 @@ export class LeagueItemComponent implements OnInit {
   joinLeague(): void {
     this.leagueService.join(this.league._id)
       .subscribe(league => {
-        this.router.navigate(['/leagues']);
+        this.router.navigate([`/leagues/${this.league._id}/lobby`]);
       });
   }
 
