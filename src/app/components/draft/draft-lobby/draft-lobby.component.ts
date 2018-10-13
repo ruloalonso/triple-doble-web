@@ -39,9 +39,11 @@ export class DraftLobbyComponent implements OnInit {
   startDraft(): void {
     if (this.league.users.length === this.league.maxUsers) {
       console.log('start draft!');
+      this.leagueService.startDraft(this.leagueId)
+        .subscribe(league => {
+          this.router.navigate(['/leagues', this.leagueId, 'draft']);
+        });
     }
-
-    // this.router.navigate(['/leagues', this.leagueId, 'draft']);
   }
 
 }

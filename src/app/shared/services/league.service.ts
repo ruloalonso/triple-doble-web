@@ -65,9 +65,24 @@ export class LeagueService extends BaseApiService {
     return this.http.post<League>(LeagueService.LEAGUE_API, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(
         map((league: League) => {
-          console.log('pushing league');
-          console.log(league);
           this.leagues.push(league);
+          this.notifyLeaguesChanges();
+          return league;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  startDraft(id: string): Observable<League | ApiError> {
+    return this.http.post<League>(`${LeagueService.LEAGUE_API}/${id}/draft`, BaseApiService.defaultOptions, { withCredentials: true })
+      .pipe(
+        map((league: League) => {
+          this.leagues.map(league => {
+            if (league._id === id) {
+              league.status = 'draft';
+            }
+            return league;
+          });
           this.notifyLeaguesChanges();
           return league;
         }),
