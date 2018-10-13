@@ -1,6 +1,6 @@
 
 <div>
-  <h2>Your are playing {{userLeagues.length}} leagues</h2>
+  <h2>You are playing {{userLeagues.length}} leagues</h2>
   <app-league-item *ngFor="let league of userLeagues" [league]="league"></app-league-item>
   <div *ngIf="userLeagues.length === 0">
     <p>You must Create or Join a league to start playing!</p>

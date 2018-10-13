@@ -17,6 +17,9 @@ export class DraftRoomComponent implements OnInit {
   leagueId: string;
   players: Array<Player> = [];
   onPlayersChanges: Subscription;
+  onLeagueChanges: Subscription;
+
+  selectedPlayerId: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,34 +29,53 @@ export class DraftRoomComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => this.leagueId = params.leagueId);
-    console.log(this.leagueId);
     this.leagueService.get(this.leagueId)
       .subscribe((newLeague: League) => {
         this.league = newLeague;
-        console.log('League Changed!!!');
       });
     this.playerService.list()
       .subscribe((players: Array<Player>) => {
         this.players = players;
-        console.log(this.players);
       });
     this.onPlayersChanges = this.playerService.onPlayersChanges()
       .subscribe((players: Array<Player>) => {
         this.players = players;
-        console.log('Players Changed!!!');
+      });
+    this.onLeagueChanges = this.leagueService.onLeaguesChanges()
+      .subscribe((leagues: Array<League>) => {
+        leagues.forEach(league => {
+          if (league._id === this.leagueId) {
+            this.league = league;
+          }
+        });
       });
   }
 
   turn() {
-    return this.league.users[this.league.turn];
+    return this.league.users[this.league.turn - 1];
   }
 
   userTurn() {
     return this.turn() === this.sessionService.user.id;
   }
 
-  getAvailablePlayers() {
+  pickPlayer(id: string) {
+    console.log(id);
+    this.passTurn();
+  }
 
+  passTurn() {
+    this.leagueService.passTurn(this.leagueId)
+      .subscribe(league => {
+      });
+  }
+
+  isSeason() {
+    return this.league.status === 'season';
+  }
+
+  ngOnDestroy(): void {
+    this.onLeagueChanges.unsubscribe();
   }
 
 }

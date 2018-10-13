@@ -1,19 +1,25 @@
 <h3>League: {{league._id}}</h3>
 
-<ul>
-  <li>Round: {{league?.round}} of {{league?.maxPlayers}}</li>
-  <li *ngIf="!userTurn()">Turn: {{league?.turn}} - User: {{turn()}}</li>
-  <li *ngIf="userTurn()">It's your turn!!!</li>
-</ul>
-
-<span>Select Player: </span>
-<select>
-    <option *ngFor="let player of players" [value]="player.id">
-      {{player.firstName}} {{player.lastName}}
-    </option>
-</select>
-
-<div>
-  <button *ngIf="userTurn()" (click)="pickPlayer()">Pick Player</button>
-  <button *ngIf="league.round > league.maxPlayers">End Draft</button>
+<div *ngIf="!isSeason()">
+  <ul>
+      <li>Round: {{league?.round}} of {{league?.maxPlayers}}</li>
+      <li >Turn {{league?.turn}} of {{league?.maxUsers}}</li>
+      <li *ngIf="!userTurn()"> User Turn: {{turn()}}</li>
+      <li *ngIf="userTurn()">It's your turn!!!</li>
+    </ul>
+    
+    <div *ngIf="userTurn()">
+        <span>Select Player: </span>
+        <select>
+            <option *ngFor="let player of players" [value]="player.id">
+              {{player.firstName}} {{player.lastName}}
+            </option>
+        </select>
+      <button  (click)="pickPlayer()">Pick Player</button>
+    </div>
 </div>
+<div *ngIf="isSeason()">
+  <h3>Draft Finished</h3>
+  <a [routerLink]="['/leagues', league._id, 'home']">League Home</a>
+</div>
+

@@ -16,5 +16,6 @@ export const routes: Routes = [
   { path: 'leagues/:leagueId', canActivate: [IsAuthenticatedGuard], component: LeagueHomeComponent },
   { path: 'leagues/:leagueId/lobby', canActivate: [IsAuthenticatedGuard],
     /* canDeactivate: [CanLeaveDraftLobbyGuard], */ component: DraftLobbyComponent },
-  { path: 'leagues/:leagueId/draft', canActivate: [IsAuthenticatedGuard], component: DraftRoomComponent }
+  { path: 'leagues/:leagueId/draft', canActivate: [IsAuthenticatedGuard], component: DraftRoomComponent },
+  { path: 'leagues/:leagueId/home', canActivate: [IsAuthenticatedGuard], component: LeagueHomeComponent }
 ];

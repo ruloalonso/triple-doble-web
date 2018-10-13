@@ -7,7 +7,7 @@
   <li *ngIf="!isUser()"><button (click)="joinLeague()">Join League</button></li>
   <li *ngIf="isUser() && isApplication()"><a [routerLink]="['/leagues', league._id, 'lobby']">Draft Lobby</a></li>
   <li *ngIf="isDraft()"><a [routerLink]="['/leagues', league._id, 'draft']">Draft Room</a></li>
-  <li *ngIf="isSeason()"><a [routerLink]="['/leagues', league._id, 'season']">Season</a></li>  
+  <li *ngIf="isSeason()"><a [routerLink]="['/leagues', league._id, 'home']">League Home</a></li>  
 </ul>
 
 

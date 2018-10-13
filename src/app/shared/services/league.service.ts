@@ -73,6 +73,26 @@ export class LeagueService extends BaseApiService {
       );
   }
 
+  passTurn(id: string): Observable<League | ApiError> {
+    return this.http.post<League>(`${LeagueService.LEAGUE_API}/${id}/turn`, BaseApiService.defaultOptions, { withCredentials: true })
+      .pipe(
+        map((league: League) => {
+          console.log(league);
+          this.leagues.map(league => {
+            if (league._id === id) {
+              league.turn++;
+              return league;
+            }
+            console.log(league);
+            return league;
+          });
+          this.notifyLeaguesChanges();
+          return league;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
   startDraft(id: string): Observable<League | ApiError> {
     return this.http.post<League>(`${LeagueService.LEAGUE_API}/${id}/draft`, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(

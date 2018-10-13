@@ -22,7 +22,6 @@ export class LeagueListComponent implements OnInit {
     this.leagueService.list()
       .subscribe(
         (leagues: Array<League>) => {
-          console.log(leagues);
           this.userLeagues = leagues.filter(league => league.users.includes(this.sessionService.user.id));
           this.otherLeagues = leagues.filter(league => !league.users.includes(this.sessionService.user.id));
         }
@@ -31,7 +30,6 @@ export class LeagueListComponent implements OnInit {
       .subscribe((leagues: Array<League>) => {
         this.userLeagues = leagues.filter(league => league.users.includes(this.sessionService.user.id));
         this.otherLeagues = leagues.filter(league => !league.users.includes(this.sessionService.user.id));
-        console.log('onLeagueChanges: Subscription!!!');
       });
   }
 
