@@ -76,18 +76,19 @@ export class LeagueService extends BaseApiService {
   passTurn(id: string): Observable<League | ApiError> {
     return this.http.post<League>(`${LeagueService.LEAGUE_API}/${id}/turn`, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(
-        map((league: League) => {
-          console.log(league);
-          this.leagues.map(league => {
+        map((newLeague: League) => {
+          console.log(this.leagues[0]);
+          console.log(newLeague);
+          console.log(id);
+          this.leagues.forEach((league, index) => {
             if (league._id === id) {
-              league.turn++;
-              return league;
+              console.log('match!');
+              this.leagues[index] = newLeague;
             }
-            console.log(league);
-            return league;
           });
+          console.log(this.leagues);
           this.notifyLeaguesChanges();
-          return league;
+          return newLeague;
         }),
         catchError(this.handleError)
       );
