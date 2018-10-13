@@ -37,7 +37,6 @@ export class DraftLobbyComponent implements OnInit, OnDestroy {
         .subscribe((league: League) => {
           this.league = league;
           if (!this.isWaiting()) {
-            console.log("NONE");
             this.pollingIntervalSubscription.unsubscribe();
           }
         });

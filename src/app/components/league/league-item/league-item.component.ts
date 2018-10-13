@@ -58,4 +58,8 @@ export class LeagueItemComponent implements OnInit {
     return this.league.users[this.league.turn - 1];
   }
 
+  draftReady(): boolean {
+    return this.league.maxUsers === this.league.users.length;
+  }
+
 }

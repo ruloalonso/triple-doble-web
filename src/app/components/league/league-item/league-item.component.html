@@ -3,7 +3,8 @@
   <li *ngIf="!isAdmin()"><p>Comissioner: {{league.admin}}</p></li>
   <li *ngIf="isAdmin()"><p>You are the commisioner!</p></li>
   <li><p>Status: {{league.status}}</p></li>
-  <li *ngIf="isApplication()"><p>{{league.maxUsers - league.users.length}} users left to start the Draft</p></li>
+  <li *ngIf="isApplication() && !draftReady()"><p>{{league.maxUsers - league.users.length}} users left to start the Draft</p></li>
+  <li *ngIf="isApplication() && draftReady()"><p>Draft is ready to start!!!</p></li>
   <li *ngIf="!isUser() && isApplication()"><button (click)="joinLeague()">Join League</button></li>
   <li *ngIf="isDraft()"><p>Round: #{{league.round}} of {{league.maxPlayers}}</p></li>
   <li *ngIf="isDraft()"><p>Turn #{{league?.turn}} of {{league?.maxUsers}}</p></li>

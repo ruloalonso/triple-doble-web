@@ -87,7 +87,7 @@ export class PlayerService extends BaseApiService {
     this.availablePlayersSubject.next(this.players);
   }
 
-  onPlayersChanges(): Observable<Array<Player>> {
-    return this.playersSubject.asObservable();
+  onAvailablePlayersChanges(): Observable<Array<Player>> {
+    return this.availablePlayersSubject.asObservable();
   }
 }
