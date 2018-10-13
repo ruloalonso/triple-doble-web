@@ -1,7 +1,6 @@
 <ul>
-  <li>Manager 1</li>
-  <li>Manager 2</li>
-  <li>Manager 3</li>
-  <li>Manager 4</li>
+  <li><p>League Comissioner: {{league.admin}}</p></li>
+  <li *ngFor="let user of league.users; index as i"><p>User {{i+1}} {{user}}</p></li>
+  <li>{{league.maxUsers - league.users.length}} users remaining to start</li>
 </ul>
-<button (click)="startDraft()">Start draft</button>
+<button *ngIf="league.users.length === league.maxUsers" (click)="startDraft()">Start draft</button>

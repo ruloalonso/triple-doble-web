@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BaseApiService } from './base-api.service';
 import { HttpClient } from '@angular/common/http';
 import { League } from '../models/league.model';
-import { Observable, Subject,} from 'rxjs';
+import { Observable, Subject} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { SessionService } from './session.service';
 
@@ -18,7 +18,7 @@ export class LeagueService extends BaseApiService {
 
   constructor(
     private http: HttpClient,
-    private sessionService: SessionService) { 
+    private sessionService: SessionService) {
     super();
   }
 
@@ -60,8 +60,6 @@ export class LeagueService extends BaseApiService {
         catchError(this.handleError)
       );
   }
-
-
 
   create(): Observable<League | ApiError> {
     return this.http.post<League>(LeagueService.LEAGUE_API, BaseApiService.defaultOptions, { withCredentials: true })
