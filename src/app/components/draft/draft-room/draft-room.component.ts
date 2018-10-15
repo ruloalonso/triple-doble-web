@@ -54,6 +54,8 @@ export class DraftRoomComponent implements OnInit {
       });
     this.onAvailablePlayersChanges = this.playerService.onAvailablePlayersChanges()
       .subscribe((players: Array<Player>) => {
+        console.log('new players!!');
+        console.log(players.length);
         this.players = players;
       });
     this.onLeagueChanges = this.leagueService.onLeaguesChanges()
