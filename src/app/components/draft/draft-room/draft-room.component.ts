@@ -35,7 +35,7 @@ export class DraftRoomComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.leagueId = params.leagueId
+      this.leagueId = params.leagueId;
       this.pollingIntervalSubscription = interval(DraftRoomComponent.POLLING_INTERVAL)
       .pipe(
         startWith(0),
@@ -46,8 +46,8 @@ export class DraftRoomComponent implements OnInit {
         if (this.isSeason()) {
           this.pollingIntervalSubscription.unsubscribe();
         }
-      });    
-    });    
+      });
+    });
     this.playerService.listAvailable()
       .subscribe((players: Array<Player>) => {
         this.players = players;
@@ -79,7 +79,7 @@ export class DraftRoomComponent implements OnInit {
       .subscribe(players => {
         console.log(players);
         this.passTurn();
-      });   
+      });
   }
 
   passTurn() {
