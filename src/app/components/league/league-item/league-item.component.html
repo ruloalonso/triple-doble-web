@@ -1,6 +1,6 @@
 <h4>League: {{league.name}}</h4>
 <ul>
-  <li *ngIf="!isAdmin()"><p>Comissioner: {{league.admin}}</p></li>
+  <li *ngIf="!isAdmin()"><p>Comissioner: {{league.admin.name}}</p></li>
   <li *ngIf="isAdmin()"><p>You are the commisioner!</p></li>
   <li><p>Status: {{league.status}}</p></li>
   <li *ngIf="isApplication() && !draftReady()"><p>{{league.maxUsers - league.users.length}} users left to start the Draft</p></li>

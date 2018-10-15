@@ -1,3 +1,20 @@
-<p>
-  league-create works!
-</p>
+<!-- <form (ngSubmit)="onSubmitCreateLeague(createLeagueForm)" #createLeagueForm="ngForm">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="League Name" name="name" [(ngModel)]="league.name" #name="ngModel" required>
+    <div class="invalid-feedback" *ngIf="name.errors && name.touched && name.errors.required">
+      Please chose an email.
+    </div>
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Your Team name and city" name="teamName" [(ngModel)]="teamName" #teamName="ngModel" required>
+    <div class="invalid-feedback" *ngIf="teamName.errors && teamName.touched && teamName.errors.required">
+      Please enter your team name.
+    </div>
+    <div class="invalid-feedback" *ngIf="apiError">
+      {{ apiError.message }}
+    </div>
+  </div>
+  <div class="form-actions">
+    <button  type="submit" class="btn btn-primary btn-block" [disabled]="!createLeagueForm.valid">Login</button>
+  </div>  
+</form> -->

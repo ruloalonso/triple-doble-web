@@ -3,6 +3,8 @@ import { Component, OnInit , Input} from '@angular/core';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { LeagueService } from 'src/app/shared/services/league.service';
 import { Router } from '@angular/router';
+import { TeamService } from 'src/app/shared/services/team.service';
+import { Team } from 'src/app/shared/models/team.model';
 
 @Component({
   selector: 'app-league-item',
@@ -15,7 +17,8 @@ export class LeagueItemComponent implements OnInit {
   constructor(
     private sessionService: SessionService,
     private leagueService: LeagueService,
-    private router: Router
+    private router: Router,
+    private teamService: TeamService
   ) { }
 
   ngOnInit() {
@@ -25,8 +28,11 @@ export class LeagueItemComponent implements OnInit {
 
   joinLeague(): void {
     this.leagueService.join(this.league._id)
-      .subscribe(league => {
-        this.router.navigate([`/leagues/${this.league._id}/lobby`]);
+      .subscribe((league: League) => {
+        this.teamService.create(league._id)
+            .subscribe((team: Team) => {
+              this.router.navigate([`/leagues/${league._id}/lobby`]);
+            });
       });
   }
 

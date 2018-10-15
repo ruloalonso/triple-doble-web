@@ -28,7 +28,6 @@ export class DraftLobbyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.leagueId = params.leagueId;
-
       this.pollingIntervalSubscription = interval(DraftLobbyComponent.POLLING_INTERVAL)
         .pipe(
           startWith(0),
@@ -39,7 +38,7 @@ export class DraftLobbyComponent implements OnInit, OnDestroy {
           if (!this.isWaiting() && this.isAdmin()) {
             this.pollingIntervalSubscription.unsubscribe();
           }
-          console.log(league);
+          // console.log(league);
           if (league.status === "draft") {
             this.pollingIntervalSubscription.unsubscribe();
             this.router.navigate(['/leagues', league._id, 'draft']);
