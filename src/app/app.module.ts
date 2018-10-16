@@ -17,6 +17,9 @@ import { LeagueHomeComponent } from './components/league/league-home/league-home
 import { DraftRoomComponent } from './components/draft/draft-room/draft-room.component';
 import { RegisterComponent } from './components/misc/register/register.component';
 import { LeagueCreateComponent } from './components/league/league-create/league-create.component';
+import { TeamItemComponent } from './components/team/team-item/team-item.component';
+import { PlayerListComponent } from './components/player/player-list/player-list.component';
+import { PlayerItemComponent } from './components/player/player-item/player-item.component';
 
 
 @NgModule({
@@ -31,6 +34,9 @@ import { LeagueCreateComponent } from './components/league/league-create/league-
     DraftRoomComponent,
     RegisterComponent,
     LeagueCreateComponent,
+    TeamItemComponent,
+    PlayerListComponent,
+    PlayerItemComponent,
   ],
   imports: [
     BrowserModule,
