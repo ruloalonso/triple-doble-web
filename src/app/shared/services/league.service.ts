@@ -16,6 +16,9 @@ export class LeagueService extends BaseApiService {
   leagues: Array<League> = [];
   leaguesSubject: Subject<Array<League>> = new Subject();
 
+  league: League;
+  leagueSubject: Subject<League> = new Subject();
+
   constructor(
     private http: HttpClient,
     private sessionService: SessionService) {
@@ -41,7 +44,9 @@ export class LeagueService extends BaseApiService {
       .pipe(
         map((league: League) => {
           console.log(league);
-          return Object.assign(new League(), league)
+          this.league = league;
+          this.notifyLeagueChanges();
+          return Object.assign(new League(), league);
         }),
         catchError(this.handleError));
   }
@@ -114,5 +119,13 @@ export class LeagueService extends BaseApiService {
 
   onLeaguesChanges(): Observable<Array<League>> {
     return this.leaguesSubject.asObservable();
+  }
+
+  onLeagueChanges(): Observable<League> {
+    return this.leagueSubject.asObservable();
+  }
+
+  private notifyLeagueChanges(): void {
+    this.leagueSubject.next(this.league);
   }
 }

@@ -30,7 +30,13 @@
 <span *ngIf="!user"> // <a class="nav-link" [routerLink]="['/login']">Login</a></span>  
 <span *ngIf="!user"> // <a class="nav-link" [routerLink]="['/signup']">Signup</a></span>
 
-<a *ngIf="user" class="nav-link"> -- Hello {{user?.name}}! -- </a> 
+<span *ngIf="league"> // <a class="nav-link" [routerLink]="['/leagues', league_id, 'home']">My team</a></span>
+<span *ngIf="league"> // <a class="nav-link" [routerLink]="['/leagues', league_id, 'lineup']">Lineup</a></span>
+<span *ngIf="league"> // <a class="nav-link" [routerLink]="['/leagues', league_id, 'ranking']">Ranking</a></span>
+<span *ngIf="league"> // <a class="nav-link" [routerLink]="['/leagues', league_id, 'agency']">Free Agency</a></span>
+<span *ngIf="league"> // <a class="nav-link" [routerLink]="['/leagues', league_id, 'trading']">Trading</a></span>
+
+<a *ngIf="user" class="nav-link"> -- {{user.name}} -- </a> 
 <button *ngIf="user" class="btn btn-link" (click)="onClickLogout()">Logout</button>
 
 
