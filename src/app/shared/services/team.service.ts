@@ -54,10 +54,11 @@ export class TeamService extends BaseApiService {
       .pipe(
         map((teams: Array<Team>) => {
           this.teams = teams;
-          //console.log(this.teams);
           this.team = teams.filter(team => team.owner === this.sessionService.user.id)[0];
-          this.notifyTeamChanges();
-          //console.log(this.team);
+          if (this.team) {
+            console.log('my team!', this.team);
+            this.notifyTeamChanges();
+          }
           return teams;
         }),
         catchError(this.handleError)
