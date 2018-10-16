@@ -20,6 +20,7 @@ import { LeagueCreateComponent } from './components/league/league-create/league-
 import { TeamItemComponent } from './components/team/team-item/team-item.component';
 import { PlayerListComponent } from './components/player/player-list/player-list.component';
 import { PlayerItemComponent } from './components/player/player-item/player-item.component';
+import { TeamLineupComponent } from './components/team/team-lineup/team-lineup.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { PlayerItemComponent } from './components/player/player-item/player-item
     TeamItemComponent,
     PlayerListComponent,
     PlayerItemComponent,
+    TeamLineupComponent,
   ],
   imports: [
     BrowserModule,

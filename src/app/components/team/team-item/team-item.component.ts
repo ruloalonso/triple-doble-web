@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./team-item.component.css']
 })
 export class TeamItemComponent implements OnInit {
+  //input team
 
   constructor() { }
 

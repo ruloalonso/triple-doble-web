@@ -7,6 +7,7 @@ import { DraftLobbyComponent } from './components/draft/draft-lobby/draft-lobby.
 import { LeagueHomeComponent } from './components/league/league-home/league-home.component';
 import { DraftRoomComponent } from './components/draft/draft-room/draft-room.component';
 import { RegisterComponent } from './components/misc/register/register.component';
+import { TeamLineupComponent } from './components/team/team-lineup/team-lineup.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   { path: 'leagues/:leagueId/lobby', canActivate: [IsAuthenticatedGuard],
     /* canDeactivate: [CanLeaveDraftLobbyGuard], */ component: DraftLobbyComponent },
   { path: 'leagues/:leagueId/draft', canActivate: [IsAuthenticatedGuard], component: DraftRoomComponent },
-  { path: 'leagues/:leagueId/home', canActivate: [IsAuthenticatedGuard], component: LeagueHomeComponent }
+  { path: 'leagues/:leagueId/home', canActivate: [IsAuthenticatedGuard], component: LeagueHomeComponent },
+  { path: 'leagues/:leagueId/lineup', canActivate: [IsAuthenticatedGuard], component: TeamLineupComponent }
 ];
