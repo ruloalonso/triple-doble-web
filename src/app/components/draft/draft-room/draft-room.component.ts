@@ -43,9 +43,13 @@ export class DraftRoomComponent implements OnInit {
       )
       .subscribe((league: League) => {
         this.league = league;
-        if (this.isSeason()) {
-          this.pollingIntervalSubscription.unsubscribe();
-        }
+        this.playerService.listAvailable()
+          .subscribe((players: Array<Player>) => {
+            this.players = players;
+            if (this.isSeason()) {
+              this.pollingIntervalSubscription.unsubscribe();
+            }
+          });
       });
     });
     this.playerService.listAvailable()
