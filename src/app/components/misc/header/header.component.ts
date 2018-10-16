@@ -41,4 +41,12 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/login']);
       });
   }
+
+  isSeason(): boolean {
+    if (this.league) {
+      console.log(this.league);
+      return this.league.status === 'season';
+    }
+    return false;
+  }
 }
