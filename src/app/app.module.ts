@@ -21,6 +21,8 @@ import { TeamItemComponent } from './components/team/team-item/team-item.compone
 import { PlayerListComponent } from './components/player/player-list/player-list.component';
 import { PlayerItemComponent } from './components/player/player-item/player-item.component';
 import { TeamLineupComponent } from './components/team/team-lineup/team-lineup.component';
+import { LeagueRankingComponent } from './components/league/league-ranking/league-ranking.component';
+import { LeagueMarketplaceComponent } from './components/league/league-marketplace/league-marketplace.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { TeamLineupComponent } from './components/team/team-lineup/team-lineup.c
     PlayerListComponent,
     PlayerItemComponent,
     TeamLineupComponent,
+    LeagueRankingComponent,
+    LeagueMarketplaceComponent,
   ],
   imports: [
     BrowserModule,

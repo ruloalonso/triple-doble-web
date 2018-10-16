@@ -30,11 +30,9 @@
 <span *ngIf="!user"> // <a class="nav-link" [routerLink]="['/login']">Login</a></span>  
 <span *ngIf="!user"> // <a class="nav-link" [routerLink]="['/signup']">Signup</a></span>
 
-<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id, 'home']">My team</a></span>
-<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id, 'lineup']">Lineup</a></span>
-<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id, 'ranking']">Ranking</a></span>
-<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id, 'agency']">Free Agency</a></span>
-<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id, 'trading']">Trading</a></span>
+<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id]">League</a></span>
+<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id, 'team', team._id]">My team</a></span>
+<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id, 'marketplace']">Marketplace</a></span>
 
 <a *ngIf="user" class="nav-link"> -- {{user.name}} -- </a> 
 <button *ngIf="user" class="btn btn-link" (click)="onClickLogout()">Logout</button>

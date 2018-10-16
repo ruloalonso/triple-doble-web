@@ -48,7 +48,8 @@ export class LeagueService extends BaseApiService {
           this.notifyLeagueChanges();
           return Object.assign(new League(), league);
         }),
-        catchError(this.handleError));
+        catchError(this.handleError)
+      );
   }
 
   join(id: string): Observable<League | ApiError> {
