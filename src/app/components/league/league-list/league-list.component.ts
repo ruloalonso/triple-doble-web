@@ -26,6 +26,7 @@ export class LeagueListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.leagueService.leave();
     this.pollingIntervalSubscription = interval(LeagueListComponent.POLLING_INTERVAL)
       .pipe(
         startWith(0),

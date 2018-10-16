@@ -128,4 +128,9 @@ export class LeagueService extends BaseApiService {
   private notifyLeagueChanges(): void {
     this.leagueSubject.next(this.league);
   }
+
+  leave(): void {
+    this.league = null;
+    this.notifyLeagueChanges();
+  }
 }
