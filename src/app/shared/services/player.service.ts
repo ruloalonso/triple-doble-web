@@ -13,9 +13,9 @@ import { Player } from '../models/player.model';
 export class PlayerService extends BaseApiService {
   private static readonly PLAYER_API = `${BaseApiService.BASE_API}/players`;
 
-  players: Array<Player> = [];
-  playersSubject: Subject<Array<Player>> = new Subject();
-  
+  // players: Array<Player> = [];
+  // playersSubject: Subject<Array<Player>> = new Subject();
+
   availablePlayers: Array<Player> = [];
   availablePlayersSubject: Subject<Array<Player>> = new Subject();
 
@@ -25,18 +25,18 @@ export class PlayerService extends BaseApiService {
     super();
   }
 
-  list(): Observable<Array<Player> | ApiError> {
-    return this.http.get<Array<Player>>(PlayerService.PLAYER_API, BaseApiService.defaultOptions)
-      .pipe(
-        map((players: Array<Player>) => {
-          players = players.map(league => Object.assign(new Player(), league));
-          this.players = players;
-          this.notifyPlayersChanges();
-          return players;
-        }),
-        catchError(this.handleError)
-      );
-  }
+  // list(): Observable<Array<Player> | ApiError> {
+  //   return this.http.get<Array<Player>>(PlayerService.PLAYER_API, BaseApiService.defaultOptions)
+  //     .pipe(
+  //       map((players: Array<Player>) => {
+  //         players = players.map(league => Object.assign(new Player(), league));
+  //         this.players = players;
+  //         this.notifyPlayersChanges();
+  //         return players;
+  //       }),
+  //       catchError(this.handleError)
+  //     );
+  // }
 
   listAvailable(): Observable<Array<Player> | ApiError> {
     let params = new HttpParams();
@@ -61,29 +61,27 @@ export class PlayerService extends BaseApiService {
   }
 
   sign(id: string): Observable<Player | ApiError> {
+    console.log('signing!!');
     return this.http.post<Player>(`${PlayerService.PLAYER_API}/${id}/sign`, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(
         map((player: Player) => {
-          this.players.map(newPlayer => {
-            if (newPlayer.id === id) {
-              newPlayer.owner = this.sessionService.user.id;
-            }
-            return newPlayer;
-          });
-          console.log(this.players);
-          this.notifyPlayersChanges();
+          console.log(this.availablePlayers.length);
+          this.availablePlayers = this.availablePlayers.filter(newPlayer => newPlayer._id !== player._id);
+          console.log(this.availablePlayers.length);
+          this.notifyAvailablePlayersChanges();
           return player;
         }),
         catchError(this.handleError)
       );
   }
 
-  private notifyPlayersChanges(): void {
-    this.playersSubject.next(this.players);
-  }
+  // private notifyPlayersChanges(): void {
+  //   this.playersSubject.next(this.players);
+  // }
 
   private notifyAvailablePlayersChanges(): void {
-    this.availablePlayersSubject.next(this.players);
+    console.log('available players changed!');
+    this.availablePlayersSubject.next(this.availablePlayers);
   }
 
   onAvailablePlayersChanges(): Observable<Array<Player>> {

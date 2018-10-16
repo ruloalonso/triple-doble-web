@@ -78,8 +78,8 @@ export class DraftRoomComponent implements OnInit {
 
   pickPlayer() {
     this.playerService.sign(this.selectedPlayer)
-      .subscribe(players => {
-        console.log(players);
+      .subscribe(player => {
+        console.log(player);
         this.passTurn();
       });
   }
