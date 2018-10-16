@@ -20,6 +20,6 @@ export const routes: Routes = [
     /* canDeactivate: [CanLeaveDraftLobbyGuard], */ component: DraftLobbyComponent },
   { path: 'leagues/:leagueId/draft', canActivate: [IsAuthenticatedGuard], component: DraftRoomComponent },
   { path: 'leagues/:leagueId', canActivate: [IsAuthenticatedGuard], component: LeagueHomeComponent },
-  { path: 'leagues/:leagueId/team/:teamId', canActivate: [IsAuthenticatedGuard], component: TeamItemComponent },
-  { path: 'leagues/:leagueId/marketplace', canActivate: [IsAuthenticatedGuard], component: LeagueMarketplaceComponent }
+  { path: 'leagues/:leagueId/marketplace', canActivate: [IsAuthenticatedGuard], component: LeagueMarketplaceComponent },
+  { path: 'teams/:teamId', canActivate: [IsAuthenticatedGuard], component: TeamItemComponent }
 ];

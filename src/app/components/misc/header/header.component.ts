@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { League } from 'src/app/shared/models/league.model';
 import { LeagueService } from 'src/app/shared/services/league.service';
+import { TeamService } from 'src/app/shared/services/team.service';
+import { Team } from 'src/app/shared/models/team.model';
 
 @Component({
   selector: 'app-header',
@@ -13,12 +15,15 @@ import { LeagueService } from 'src/app/shared/services/league.service';
 export class HeaderComponent implements OnInit {
   user: User;
   league: League;
+  team: Team;
   onUserChanges: Subscription;
   onLeagueChanges: Subscription;
+  onTeamChanges: Subscription;
 
   constructor(
     private sessionService: SessionService,
     private leagueService: LeagueService,
+    private teamService: TeamService,
     private router: Router
   ) {}
 
@@ -30,9 +35,15 @@ export class HeaderComponent implements OnInit {
       });
     this.league = this.leagueService.league;
     this.onLeagueChanges = this.leagueService.onLeagueChanges()
-    .subscribe((league: League) => {
-      this.league = league;
+      .subscribe((league: League) => {
+        this.league = league;
     });
+    this.team = this.teamService.team;
+    this.onTeamChanges = this.teamService.onTeamChanges()
+      .subscribe((team: Team) => {
+        this.team = team;
+    });
+
   }
 
   onClickLogout(): void {
@@ -44,7 +55,7 @@ export class HeaderComponent implements OnInit {
 
   isSeason(): boolean {
     if (this.league) {
-      console.log(this.league);
+      //console.log(this.league);
       return this.league.status === 'season';
     }
     return false;

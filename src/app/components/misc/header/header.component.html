@@ -31,7 +31,7 @@
 <span *ngIf="!user"> // <a class="nav-link" [routerLink]="['/signup']">Signup</a></span>
 
 <span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id]">League</a></span>
-<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id, 'team', team._id]">My team</a></span>
+<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/teams', team._id]">My team</a></span>
 <span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id, 'marketplace']">Marketplace</a></span>
 
 <a *ngIf="user" class="nav-link"> -- {{user.name}} -- </a> 

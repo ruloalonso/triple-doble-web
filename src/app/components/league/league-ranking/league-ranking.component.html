@@ -1,6 +1,6 @@
-<ol>
-  <li><a href="">team</a>: #points</li>
-  <li><a href="">team</a>: #points</li>
-  <li><a href="">team</a>: #points</li>
-  <li><a href="">team</a>: #points</li>
-</ol>
+<div>
+  <p *ngFor="let team of teams; index as i"> 
+    #{{i+1}}: <a class="nav-link" [routerLink]="['/teams', team._id]">{{team.name}}</a> - 
+    <small>owner: {{team.owner}}</small>
+    </p>
+</div>

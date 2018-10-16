@@ -31,7 +31,6 @@ export class LeagueService extends BaseApiService {
         map((leagues: Array<League>) => {
           leagues = leagues.map(league => Object.assign(new League(), league));
           this.leagues = leagues;
-          console.log(leagues);
           this.notifyLeaguesChanges();
           return leagues;
         }),
@@ -43,7 +42,6 @@ export class LeagueService extends BaseApiService {
     return this.http.get<League>(`${LeagueService.LEAGUE_API}/${id}`, BaseApiService.defaultOptions)
       .pipe(
         map((league: League) => {
-          console.log(league);
           this.league = league;
           this.notifyLeagueChanges();
           return Object.assign(new League(), league);

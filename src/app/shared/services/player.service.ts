@@ -61,13 +61,13 @@ export class PlayerService extends BaseApiService {
   }
 
   sign(id: string): Observable<Player | ApiError> {
-    console.log('signing!!');
+    //console.log('signing!!');
     return this.http.post<Player>(`${PlayerService.PLAYER_API}/${id}/sign`, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(
         map((player: Player) => {
-          console.log(this.availablePlayers.length);
+          //console.log(this.availablePlayers.length);
           this.availablePlayers = this.availablePlayers.filter(newPlayer => newPlayer._id !== player._id);
-          console.log(this.availablePlayers.length);
+          //console.log(this.availablePlayers.length);
           this.notifyAvailablePlayersChanges();
           return player;
         }),
@@ -80,7 +80,7 @@ export class PlayerService extends BaseApiService {
   // }
 
   private notifyAvailablePlayersChanges(): void {
-    console.log('available players changed!');
+    //console.log('available players changed!');
     this.availablePlayersSubject.next(this.availablePlayers);
   }
 

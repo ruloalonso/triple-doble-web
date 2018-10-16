@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Team } from 'src/app/shared/models/team.model';
+import { TeamService } from 'src/app/shared/services/team.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-league-ranking',
@@ -6,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./league-ranking.component.css']
 })
 export class LeagueRankingComponent implements OnInit {
+  teams: Array<Team>  = [];
+  leagueId: string;
 
-  constructor() { }
+  constructor(
+    private teamService: TeamService,
+    private route: ActivatedRoute
+    ) {}
 
   ngOnInit() {
+    this.route.params.subscribe(params => this.leagueId = params.leagueId);
+    this.teamService.list(this.leagueId)
+      .subscribe((teams: Array<Team>) => {
+        // console.log(teams);
+        this.teams = teams;
+      });
   }
 
 }
