@@ -13,10 +13,10 @@
       <span>Select Player: </span>
       <select [(ngModel)]="selectedPlayer" (change)="selectChange()">
         <option *ngFor="let player of players" [value]="player._id">
-          {{player.firstName}} {{player.lastName}} - {{player._id}}
+          {{player.firstName}} {{player.lastName}}
         </option>
       </select>
-      <button  (click)="pickPlayer()">Pick Player</button>
+      <button (click)="pickPlayer()">Pick Player</button>
     </div>
 </div>
 <div *ngIf="isSeason()">

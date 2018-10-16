@@ -6,4 +6,5 @@ export class Player {
   team: string;
   owner?: string;
   image?: string;
+  //contracts: [number];
 }

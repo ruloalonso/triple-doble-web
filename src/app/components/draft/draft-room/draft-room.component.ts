@@ -42,14 +42,17 @@ export class DraftRoomComponent implements OnInit {
         switchMap(() => this.leagueService.get(this.leagueId))
       )
       .subscribe((league: League) => {
+        if (this.league.turn !== league.turn) {
+          console.log('turn change!');
+          this.playerService.listAvailable()
+            .subscribe((players: Array<Player>) => {
+              this.players = players;
+            });
+        }
         this.league = league;
-        this.playerService.listAvailable()
-          .subscribe((players: Array<Player>) => {
-            this.players = players;
-            if (this.isSeason()) {
-              this.pollingIntervalSubscription.unsubscribe();
-            }
-          });
+        if (this.isSeason()) {
+          this.pollingIntervalSubscription.unsubscribe();
+        }
       });
     });
     this.playerService.listAvailable()
@@ -83,7 +86,6 @@ export class DraftRoomComponent implements OnInit {
   pickPlayer() {
     this.playerService.sign(this.selectedPlayer)
       .subscribe(player => {
-        console.log(player);
         this.passTurn();
       });
   }
