@@ -9,6 +9,7 @@ import { SessionService } from 'src/app/shared/services/session.service';
 import { Player } from 'src/app/shared/models/player.model';
 import { Subscription } from 'rxjs';
 import { PlayerService } from 'src/app/shared/services/player.service';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-draft-room',
@@ -43,7 +44,7 @@ export class DraftRoomComponent implements OnInit {
       )
       .subscribe((league: League) => {
         if (this.league.turn !== league.turn) {
-          //console.log('turn change!');
+          // console.log('turn change!');
           this.playerService.listAvailable()
             .subscribe((players: Array<Player>) => {
               this.players = players;
@@ -75,12 +76,12 @@ export class DraftRoomComponent implements OnInit {
       });
   }
 
-  turn() {
+  turn(): User {
     return this.league.users[this.league.turn - 1];
   }
 
-  userTurn() {
-    return this.turn() === this.sessionService.user.id;
+  userTurn(): boolean {
+    return this.turn().id === this.sessionService.user.id;
   }
 
   pickPlayer() {

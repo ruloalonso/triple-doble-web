@@ -5,6 +5,7 @@ import { LeagueService } from 'src/app/shared/services/league.service';
 import { Router } from '@angular/router';
 import { TeamService } from 'src/app/shared/services/team.service';
 import { Team } from 'src/app/shared/models/team.model';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-league-item',
@@ -24,6 +25,7 @@ export class LeagueItemComponent implements OnInit {
   ngOnInit() {
     // console.log(this.league);
     // console.log(this.sessionService.user)
+    console.log(this.isUser());
   }
 
   joinLeague(): void {
@@ -37,31 +39,34 @@ export class LeagueItemComponent implements OnInit {
   }
 
   isAdmin(): boolean {
-    return this.sessionService.user.id === this.league.admin;
+    return this.sessionService.user.id === this.league.admin.id;
   }
 
   isUser(): boolean {
-    return this.league.users.includes(this.sessionService.user.id);
+    return this.league.users.some(user => user.id === this.sessionService.user.id);
   }
 
   isApplication(): boolean {
-    return this.league.status === 'application'
+    return this.league.status === 'application';
   }
 
   isDraft(): boolean {
-    return this.league.status === 'draft'
+    if (this.league.status === 'draft') {
+      console.log('isDraft!!!');
+    }
+    return this.league.status === 'draft';
   }
 
   isSeason(): boolean {
-    return this.league.status === 'season'
+    return this.league.status === 'season';
   }
 
   isTurn(): boolean {
-    return this.league.users[this.league.turn - 1] === this.sessionService.user.id;
+    return this.league.users[this.league.turn - 1].id === this.sessionService.user.id;
   }
 
   userTurn(): string {
-    return this.league.users[this.league.turn - 1];
+    return this.league.users[this.league.turn - 1].name;
   }
 
   draftReady(): boolean {

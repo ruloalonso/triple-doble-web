@@ -40,7 +40,7 @@ export class PlayerService extends BaseApiService {
 
   listAvailable(): Observable<Array<Player> | ApiError> {
     let params = new HttpParams();
-    params = params.append('available', 'true')
+    params = params.append('available', 'true');
     return this.http.get<Array<Player>>(`${PlayerService.PLAYER_API}/?available=true`, BaseApiService.defaultOptions)
       .pipe(
         map((players: Array<Player>) => {
@@ -75,12 +75,20 @@ export class PlayerService extends BaseApiService {
       );
   }
 
-  // private notifyPlayersChanges(): void {
-  //   this.playersSubject.next(this.players);
-  // }
+  team(id: string): Observable<Array<Player> | ApiError> {
+    // let params = new HttpParams();
+    // params = params.append('available', 'true')
+    return this.http.get<Array<Player>>(`${PlayerService.PLAYER_API}/?team=${id}`, BaseApiService.defaultOptions)
+      .pipe(
+        map((players: Array<Player>) => {
+          players = players.map(league => Object.assign(new Player(), league));
+          return players;
+        }),
+        catchError(this.handleError)
+      );
+  }
 
   private notifyAvailablePlayersChanges(): void {
-    //console.log('available players changed!');
     this.availablePlayersSubject.next(this.availablePlayers);
   }
 

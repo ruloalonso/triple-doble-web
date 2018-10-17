@@ -1,8 +1,10 @@
+import { User } from './user.model';
+
 export class League {
   name: string;
   _id: string;
-  admin: string;
-  users: [string];
+  admin: User;
+  users: [User];
   status: string;
   round: string;
   turn: number;

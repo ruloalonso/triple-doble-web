@@ -52,9 +52,8 @@ export class TeamService extends BaseApiService {
       .pipe(
         map((teams: Array<Team>) => {
           this.teams = teams;
-          this.team = teams.filter(team => team.owner === this.sessionService.user.id)[0];
+          this.team = teams.filter(team => team.owner.id === this.sessionService.user.id)[0];
           if (this.team) {
-            console.log('my team!', this.team);
             this.notifyTeamChanges();
           }
           return teams;

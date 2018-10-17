@@ -56,7 +56,7 @@ export class LeagueService extends BaseApiService {
         map((league: League) => {
           this.leagues.map(league => {
             if (league._id === id) {
-              league.users.push(this.sessionService.user.id);
+              league.users.push(this.sessionService.user);
             }
             return league;
           });
@@ -67,7 +67,7 @@ export class LeagueService extends BaseApiService {
       );
   }
 
-  create(): Observable<League | ApiError> {    
+  create(): Observable<League | ApiError> {
     return this.http.post<League>(LeagueService.LEAGUE_API, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(
         map((league: League) => {

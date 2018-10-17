@@ -23,7 +23,8 @@ export class DraftLobbyComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private leagueService: LeagueService,
-    private sessionService: SessionService) { }
+    private sessionService: SessionService
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -56,7 +57,7 @@ export class DraftLobbyComponent implements OnInit, OnDestroy {
   }
 
   isAdmin(): boolean {
-    return this.sessionService.user.id === this.league.admin;
+    return this.sessionService.user.id === this.league.admin.id;
   }
 
   isWaiting(): boolean {

@@ -1,2 +1,2 @@
 <h2>{{team.name}}</h2>
-<app-player-list></app-player-list>
+<app-player-list *ngIf="team" [team]="team"></app-player-list>

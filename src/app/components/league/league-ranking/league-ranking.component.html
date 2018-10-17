@@ -1,6 +1,6 @@
 <div>
   <p *ngFor="let team of teams; index as i"> 
     #{{i+1}}: <a class="nav-link" [routerLink]="['/teams', team._id]">{{team.name}}</a> - 
-    <small>owner: {{team.owner}}</small>
+    <small>owner: {{team.owner.name}}</small>
     </p>
 </div>

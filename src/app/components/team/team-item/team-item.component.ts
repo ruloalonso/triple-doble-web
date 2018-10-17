@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./team-item.component.css']
 })
 export class TeamItemComponent implements OnInit {
-  team: Team = new Team();
+  team: Team;
 
   constructor(
     private teamService: TeamService,
@@ -18,10 +18,8 @@ export class TeamItemComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      console.log(params.teamId);
       this.teamService.get(params.teamId)
         .subscribe((team: Team) => {
-          console.log(team);
           this.team = team;
         });
     });
