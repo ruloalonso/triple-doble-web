@@ -37,17 +37,15 @@ export class TeamService extends BaseApiService {
       );
   }
 
-  // get(id: string): Observable<Team | ApiError> {
-  //   return this.http.get<Team>(`${TeamService.TEAM_API}/${id}`, BaseApiService.defaultOptions)
-  //     .pipe(
-  //       map((team: Team) => {
-  //         this.league = league;
-  //         this.notifyLeagueChanges();
-  //         return Object.assign(new League(), league);
-  //       }),
-  //       catchError(this.handleError)
-  //     );
-  // }
+  get(id: string): Observable<Team | ApiError> {
+    return this.http.get<Team>(`${TeamService.TEAM_API}/${id}`, BaseApiService.defaultOptions)
+      .pipe(
+        map((team: Team) => {
+          return Object.assign(new Team(), team);
+        }),
+        catchError(this.handleError)
+      );
+  }
 
   list(leagueId: String): Observable<Array<Team> | ApiError> {
     return this.http.get<Array<Team>>(`${TeamService.LEAGUE_API}/${leagueId}/teams`, BaseApiService.defaultOptions)
