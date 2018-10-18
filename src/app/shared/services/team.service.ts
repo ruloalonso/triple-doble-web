@@ -26,8 +26,8 @@ export class TeamService extends BaseApiService {
     super();
   }
 
-  create(leagueId: String): Observable<Team | ApiError> {
-    return this.http.post<Team>(`${TeamService.LEAGUE_API}/${leagueId}/team`, BaseApiService.defaultOptions, { withCredentials: true })
+  create(leagueId: string, name: string, city: string): Observable<Team | ApiError> {
+    return this.http.post<Team>(`${TeamService.LEAGUE_API}/${leagueId}/team`, {name: name, city: city}, { withCredentials: true })
       .pipe(
         map((team: Team) => {
           this.teams.push(team);

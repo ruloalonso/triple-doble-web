@@ -1,11 +1,10 @@
 import { League } from './../../../shared/models/league.model';
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { LeagueService } from 'src/app/shared/services/league.service';
 import { Router } from '@angular/router';
 import { TeamService } from 'src/app/shared/services/team.service';
 import { Team } from 'src/app/shared/models/team.model';
-import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-league-item',
@@ -14,6 +13,9 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class LeagueItemComponent implements OnInit {
   @Input() league: League = new League();
+  @Output() writting: EventEmitter<any> = new EventEmitter();
+  teamCity: string;
+  teamName: string;
 
   constructor(
     private sessionService: SessionService,
@@ -29,7 +31,7 @@ export class LeagueItemComponent implements OnInit {
   joinLeague(): void {
     this.leagueService.join(this.league._id)
       .subscribe((league: League) => {
-        this.teamService.create(league._id)
+        this.teamService.create(league._id, this.teamName, this.teamCity)
             .subscribe((team: Team) => {
               this.router.navigate([`/leagues/${league._id}/lobby`]);
             });
@@ -66,6 +68,10 @@ export class LeagueItemComponent implements OnInit {
 
   draftReady(): boolean {
     return this.league.maxUsers === this.league.users.length;
+  } 
+  
+  onWritting(): void {
+    this.writting.emit();
   }
 
 }

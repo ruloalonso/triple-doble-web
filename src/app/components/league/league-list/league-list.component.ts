@@ -19,6 +19,8 @@ export class LeagueListComponent implements OnInit {
   onLeagueChanges: Subscription;
   pollingIntervalSubscription: Subscription;
   leagueName: string;
+  teamCity: string;
+  teamName: string;
 
   constructor(
     private leagueService: LeagueService,
@@ -34,7 +36,9 @@ export class LeagueListComponent implements OnInit {
         switchMap(() => this.leagueService.list())
       )
       .subscribe((leagues: Array<League>) => {
-        this.leagues = leagues;
+        if (this.leagues !== leagues) {
+          this.leagues = leagues;
+        }
       });
     this.onLeagueChanges = this.leagueService.onLeaguesChanges()
       .subscribe((leagues: Array<League>) => {
@@ -55,11 +59,16 @@ export class LeagueListComponent implements OnInit {
     this.leagueService.create(this.leagueName)
       .subscribe(
         (league: League) => {
-          this.teamService.create(league._id)
+          this.teamService.create(league._id, this.teamName, this.teamCity)
             .subscribe((team: Team) => {
               this.router.navigate([`/leagues/${league._id}/lobby`])
             });
         }
       );
   }
+
+  pollingUnsubscribe() {
+    this.pollingIntervalSubscription.unsubscribe();
+  }
+
 }

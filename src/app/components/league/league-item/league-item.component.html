@@ -5,7 +5,6 @@
   <li><p>Status: {{league.status}}</p></li>
   <li *ngIf="isApplication() && !draftReady()"><p>{{league.maxUsers - league.users.length}} users left to start the Draft</p></li>
   <li *ngIf="isApplication() && draftReady()"><p><b>DRAFT IS READY TO START!!!</b></p></li>
-  <li *ngIf="!isUser() && isApplication()"><button (click)="joinLeague()">Join League</button></li>
   <li *ngIf="isDraft()"><p>Round: #{{league.round}} of {{league.maxPlayers}}</p></li>
   <li *ngIf="isDraft()"><p>Turn #{{league?.turn}} of {{league?.maxUsers}}</p></li>
   <li *ngIf="isDraft() && isTurn()"><p><b>IT'S YOUR TURN!!!</b></p></li>
@@ -13,6 +12,11 @@
   <li *ngIf="isUser() && isApplication()"><p><a [routerLink]="['/leagues', league._id, 'lobby']">Draft Lobby</a></p></li>
   <li *ngIf="isUser() && isDraft()"><p><a [routerLink]="['/leagues', league._id, 'draft']">Draft Room</a></p></li>
   <li *ngIf="isUser() && isSeason()"><p><a [routerLink]="['/leagues', league._id]">League Home</a></p></li>  
+  <li *ngIf="!isUser() && isApplication()">
+    <input type="text" (focus)="onWritting()" [(ngModel)]="teamCity" placeholder="Team City">    
+    <input type="text" (focus)="onWritting()" [(ngModel)]="teamName" placeholder="Team Name">
+    <button (click)="joinLeague()">Join League</button>
+  </li> 
 </ul>
 
 
