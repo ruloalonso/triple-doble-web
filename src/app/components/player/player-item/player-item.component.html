@@ -1,8 +1,26 @@
-<h3>#player.name</h3> 
-<p>--</p>
-<p>--photo--</p>
-<p>--</p>
+<h3>{{player.firstName}} {{player.lastName}}</h3> 
+
+<div style="width: 30%;">
+  <div
+    id="headshot" 
+    class="headshot-new" 
+    style="width: 100%; height: auto !important;"
+    [ngStyle]="{'background-image': imgUrl}"
+  >
+    <img 
+      class="jersey" 
+      style="width: 100%; height: auto !important;" 
+      src="https://cdn.basketball.sports.ws/jerseys/CHI.png" 
+      alt="Jabari Parker - CHI"
+    >
+  </div>
+</div>
+
+
+<!-- <div class="headshot-new" style="width: 100%; height: auto !important; background-image: url(https://cdn.basketball.sports.ws/players/png/kevon_looney.png);"><img class="jersey" style="width: 100%; height: auto !important;" src="https://cdn.basketball.sports.ws/jerseys/GSW.png" alt="Kevon Looney - GSW"></div> -->
 <p>Fantasy Points</p>
 <p>Puntos</p>
 <p>Rebotes</p>
 <p>Asistencias</p>
+
+<!-- <div class="headshot-new" style="width: 100%; height: auto !important; background-image: url(https://cdn.basketball.sports.ws/players/png/jabari_parker.png);"><img class="jersey" style="width: 100%; height: auto !important;" src="https://cdn.basketball.sports.ws/jerseys/CHI.png" alt="Jabari Parker - CHI"></div> -->

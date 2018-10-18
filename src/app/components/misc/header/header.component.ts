@@ -55,7 +55,6 @@ export class HeaderComponent implements OnInit {
 
   isSeason(): boolean {
     if (this.league) {
-      //console.log(this.league);
       return this.league.status === 'season';
     }
     return false;

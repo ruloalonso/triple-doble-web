@@ -49,9 +49,6 @@ export class LeagueItemComponent implements OnInit {
   }
 
   isDraft(): boolean {
-    if (this.league.status === 'draft') {
-      console.log('isDraft!!!');
-    }
     return this.league.status === 'draft';
   }
 

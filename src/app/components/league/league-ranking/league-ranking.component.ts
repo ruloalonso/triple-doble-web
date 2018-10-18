@@ -21,7 +21,6 @@ export class LeagueRankingComponent implements OnInit {
     this.route.params.subscribe(params => this.leagueId = params.leagueId);
     this.teamService.list(this.leagueId)
       .subscribe((teams: Array<Team>) => {
-        // console.log(teams);
         this.teams = teams;
       });
   }

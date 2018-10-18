@@ -1,14 +1,14 @@
-<h4>League: {{league.name}}</h4>
+<h3>{{league.name}}</h3>
 <ul>
   <li *ngIf="!isAdmin()"><p>Comissioner: {{league.admin.name}}</p></li>
   <li *ngIf="isAdmin()"><p>You are the commisioner!</p></li>
   <li><p>Status: {{league.status}}</p></li>
   <li *ngIf="isApplication() && !draftReady()"><p>{{league.maxUsers - league.users.length}} users left to start the Draft</p></li>
-  <li *ngIf="isApplication() && draftReady()"><p>Draft is ready to start!!!</p></li>
+  <li *ngIf="isApplication() && draftReady()"><p><b>DRAFT IS READY TO START!!!</b></p></li>
   <li *ngIf="!isUser() && isApplication()"><button (click)="joinLeague()">Join League</button></li>
   <li *ngIf="isDraft()"><p>Round: #{{league.round}} of {{league.maxPlayers}}</p></li>
   <li *ngIf="isDraft()"><p>Turn #{{league?.turn}} of {{league?.maxUsers}}</p></li>
-  <li *ngIf="isDraft()"><p>IT'S YOUR TURN!!!</p></li>
+  <li *ngIf="isDraft() && isTurn()"><p><b>IT'S YOUR TURN!!!</b></p></li>
   <li *ngIf="isDraft() && !isTurn()"><p>It's {{userTurn()}}'s turn</p></li>
   <li *ngIf="isUser() && isApplication()"><p><a [routerLink]="['/leagues', league._id, 'lobby']">Draft Lobby</a></p></li>
   <li *ngIf="isUser() && isDraft()"><p><a [routerLink]="['/leagues', league._id, 'draft']">Draft Room</a></p></li>

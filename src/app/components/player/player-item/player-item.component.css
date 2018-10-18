@@ -1,0 +1,14 @@
+.headshot-new {
+  background-color: transparent;
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: pixelated;
+  max-width: 150px;
+}
+
+.jersey {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: pixelated;
+}

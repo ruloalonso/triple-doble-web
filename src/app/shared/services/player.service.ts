@@ -60,14 +60,11 @@ export class PlayerService extends BaseApiService {
         catchError(this.handleError));
   }
 
-  sign(id: string): Observable<Player | ApiError> {
-    //console.log('signing!!');
-    return this.http.post<Player>(`${PlayerService.PLAYER_API}/${id}/sign`, BaseApiService.defaultOptions, { withCredentials: true })
+  sign(playerId: string, leagueId: string): Observable<Player | ApiError> {
+    return this.http.post<Player>(`${PlayerService.PLAYER_API}/${playerId}/sign`, { leagueId: leagueId }, { withCredentials: true })
       .pipe(
         map((player: Player) => {
-          //console.log(this.availablePlayers.length);
           this.availablePlayers = this.availablePlayers.filter(newPlayer => newPlayer._id !== player._id);
-          //console.log(this.availablePlayers.length);
           this.notifyAvailablePlayersChanges();
           return player;
         }),
@@ -76,12 +73,9 @@ export class PlayerService extends BaseApiService {
   }
 
   team(id: string): Observable<Array<Player> | ApiError> {
-    // let params = new HttpParams();
-    // params = params.append('available', 'true')
     return this.http.get<Array<Player>>(`${PlayerService.PLAYER_API}/?team=${id}`, BaseApiService.defaultOptions)
       .pipe(
         map((players: Array<Player>) => {
-          console.log(players);
           players = players.map(player => Object.assign(new Player(), player));
           return players;
         }),

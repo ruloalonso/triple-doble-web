@@ -1,7 +1,3 @@
-player-list: {{team?.name}}
-
-<app-player-item></app-player-item>
-<app-player-item></app-player-item>
-<app-player-item></app-player-item>
-<app-player-item></app-player-item>
-
+<div *ngIf="players">
+  <app-player-item *ngFor="let player of players" [player]="player"></app-player-item>
+</div>

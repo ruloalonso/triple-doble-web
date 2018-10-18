@@ -20,7 +20,6 @@ export class LeagueHomeComponent implements OnInit {
     this.route.params.subscribe(params => this.league._id = params.leagueId);
     this.leagueService.get(this.league._id)
       .subscribe((league: League) => {
-        //console.log(this.league);
         this.league = league;
       });
   }

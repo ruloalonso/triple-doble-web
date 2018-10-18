@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PlayerService } from 'src/app/shared/services/player.service';
-import { ActivatedRoute } from '@angular/router';
 import { Team } from 'src/app/shared/models/team.model';
 import { Player } from 'src/app/shared/models/player.model';
 
@@ -11,17 +10,16 @@ import { Player } from 'src/app/shared/models/player.model';
 })
 export class PlayerListComponent implements OnInit {
   @Input()team: Team;
+  players: Array<Player>;
 
   constructor(
     private playerService: PlayerService,
-    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    console.log('team', this.team);
-    this.playerService.team(this.team.id)
+    this.playerService.team(this.team._id)
       .subscribe((players: Array<Player>) => {
-        console.log(players);
+        this.players = players;
       });
   }
 

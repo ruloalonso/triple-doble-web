@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Player } from 'src/app/shared/models/player.model';
 
 @Component({
   selector: 'app-player-item',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./player-item.component.css']
 })
 export class PlayerItemComponent implements OnInit {
+  @Input() player: Player;
+  imgUrl = '';
 
   constructor() { }
 
   ngOnInit() {
+    this.imgUrl = `url("https://cdn.basketball.sports.ws/players/png/${this.player.firstName.toLowerCase()}_${this.player.lastName.toLowerCase()}.png")`;
   }
 
 }
