@@ -67,8 +67,8 @@ export class LeagueService extends BaseApiService {
       );
   }
 
-  create(): Observable<League | ApiError> {
-    return this.http.post<League>(LeagueService.LEAGUE_API, BaseApiService.defaultOptions, { withCredentials: true })
+  create(name: string): Observable<League | ApiError> {
+    return this.http.post<League>(LeagueService.LEAGUE_API, { name: name }, { withCredentials: true })
       .pipe(
         map((league: League) => {
           this.leagues.push(league);

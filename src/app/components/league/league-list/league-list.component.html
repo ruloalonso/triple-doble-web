@@ -4,4 +4,5 @@
   <app-league-item *ngFor="let league of leagues" [league]="league"></app-league-item>
 </div>
 
+<input type="text" [(ngModel)]="leagueName" placeholder="League Name">
 <button (click)="createLeague()">Create League</button>

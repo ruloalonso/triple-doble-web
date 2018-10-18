@@ -18,6 +18,7 @@ export class LeagueListComponent implements OnInit {
   leagues: Array<League> = [];
   onLeagueChanges: Subscription;
   pollingIntervalSubscription: Subscription;
+  leagueName: string;
 
   constructor(
     private leagueService: LeagueService,
@@ -50,7 +51,8 @@ export class LeagueListComponent implements OnInit {
   }
 
   createLeague() {
-    this.leagueService.create()
+    console.log(this.leagueName);
+    this.leagueService.create(this.leagueName)
       .subscribe(
         (league: League) => {
           this.teamService.create(league._id)
