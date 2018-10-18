@@ -81,7 +81,8 @@ export class PlayerService extends BaseApiService {
     return this.http.get<Array<Player>>(`${PlayerService.PLAYER_API}/?team=${id}`, BaseApiService.defaultOptions)
       .pipe(
         map((players: Array<Player>) => {
-          players = players.map(league => Object.assign(new Player(), league));
+          console.log(players);
+          players = players.map(player => Object.assign(new Player(), player));
           return players;
         }),
         catchError(this.handleError)

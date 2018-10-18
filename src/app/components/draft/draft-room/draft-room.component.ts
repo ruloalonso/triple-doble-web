@@ -62,8 +62,8 @@ export class DraftRoomComponent implements OnInit {
       });
     this.onAvailablePlayersChanges = this.playerService.onAvailablePlayersChanges()
       .subscribe((players: Array<Player>) => {
-        //console.log('new players!!');
-       // console.log(players.length);
+        // console.log('new players!!');
+        // console.log(players.length);
         this.players = players;
       });
     this.onLeagueChanges = this.leagueService.onLeaguesChanges()
@@ -107,7 +107,7 @@ export class DraftRoomComponent implements OnInit {
   }
 
   selectChange(): void {
-    //console.log(this.selectedPlayer);
+    // console.log(this.selectedPlayer);
   }
 
 }

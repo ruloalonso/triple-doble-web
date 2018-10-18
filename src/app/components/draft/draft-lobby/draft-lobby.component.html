@@ -1,12 +1,17 @@
-<h3>Draft Lobby of League: {{league.name}}</h3>
+<h3>Draft Lobby // {{league.name}}</h3>
 
-<ul>  
-  <li *ngIf="!isAdmin()"><p>League Comissioner: {{league.admin.name}}</p></li>
-  <li *ngIf="isAdmin()"><p>You are the commisioner!!!!!</p></li>
-  <li *ngFor="let user of league.users; index as i"><p>User #{{i+1}}: {{user.name}}</p></li>
-  <li *ngIf="isWaiting()"><p>{{league.maxUsers - league.users.length}} users remaining to start</p></li>
-  <li *ngIf="isWaiting()"><p>Waiting for users to join the league...</p></li>
-  <li *ngIf="!isWaiting()"><p>READY to start!!!</p></li>  
-  <li *ngIf="(league.users.length === league.maxUsers) && !isAdmin()"><p>Waiting for Commisioner to Start the Draft...</p></li> 
-</ul>
+<p *ngIf="!isAdmin()">League Comissioner: {{league.admin.name}}</p>
+<p *ngIf="isAdmin()">You are the Commisioner</p>
+
+<h5>{{league.users.length}} players joined the league</h5>
+
+<ol>
+  <li *ngFor="let user of league.users; index as i"><p>{{user.name}}</p></li>
+</ol>
+
+<h3 *ngIf="isWaiting()"><p>Waiting for {{league.maxUsers - league.users.length}} users to start the Draft...</p></h3>
+<h3 *ngIf="!isWaiting()"><p>READY to start!!!</p></h3>  
+
+<h5 *ngIf="(league.users.length === league.maxUsers) && !isAdmin()"><p>Wait for the Commisioner to start the Draft...</p></h5> 
+
 <button *ngIf="league.users.length === league.maxUsers && isAdmin()" (click)="startDraft()">Start Draft</button>

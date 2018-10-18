@@ -23,9 +23,7 @@ export class LeagueItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.league);
-    // console.log(this.sessionService.user)
-    console.log(this.isUser());
+
   }
 
   joinLeague(): void {
