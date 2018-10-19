@@ -13,6 +13,9 @@ import { Player } from '../models/player.model';
 export class PlayerService extends BaseApiService {
   private static readonly PLAYER_API = `${BaseApiService.BASE_API}/players`;
 
+  players: Array<Player> = [];
+  playersSubject: Subject<Array<Player>> = new Subject();
+
   availablePlayers: Array<Player> = [];
   availablePlayersSubject: Subject<Array<Player>> = new Subject();
 
@@ -26,8 +29,16 @@ export class PlayerService extends BaseApiService {
     this.availablePlayersSubject.next(this.availablePlayers);
   }
 
+  private notifyPlayersChanges(): void {
+    this.playersSubject.next(this.players);
+  }
+
   onAvailablePlayersChanges(): Observable<Array<Player>> {
     return this.availablePlayersSubject.asObservable();
+  }
+
+  onPlayersChanges(): Observable<Array<Player>> {
+    return this.playersSubject.asObservable();
   }
 
   listAvailable(): Observable<Array<Player> | ApiError> {
@@ -68,6 +79,8 @@ export class PlayerService extends BaseApiService {
     return this.http.get<Array<Player>>(`${PlayerService.PLAYER_API}/?team=${id}`, BaseApiService.defaultOptions)
       .pipe(
         map((players: Array<Player>) => {
+          this.players = players;
+          this.notifyPlayersChanges();
           players = players.map(player => Object.assign(new Player(), player));
           return players;
         }),
@@ -79,8 +92,13 @@ export class PlayerService extends BaseApiService {
     return this.http.post<Player>(`${PlayerService.PLAYER_API}/${player._id}/position/${position}`, BaseApiService.defaultOptions, { withCredentials: true })
       .pipe(
         map((player: Player) => {
-          // this.players = this.availablePlayers.filter(newPlayer => newPlayer._id !== player._id);
-          // this.notifyAvailablePlayersChanges();
+          this.players = this.players.map(newPlayer => {
+            if (newPlayer._id === player._id) {
+              newPlayer.position = position;
+            }
+            return newPlayer;
+          });
+          this.notifyPlayersChanges();
           return player;
         }),
         catchError(this.handleError)

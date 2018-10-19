@@ -41,6 +41,11 @@ export class TeamService extends BaseApiService {
     return this.http.get<Team>(`${TeamService.TEAM_API}/${id}`, BaseApiService.defaultOptions)
       .pipe(
         map((team: Team) => {
+          if (team.owner.id === this.sessionService.user.id) {
+            console.log('team-service team get', team);
+            this.team = team;
+            this.notifyTeamChanges();
+          }
           return Object.assign(new Team(), team);
         }),
         catchError(this.handleError)

@@ -2,13 +2,16 @@
 
 
 
-<h2 *ngIf="isAPosition('G')">Guard</h2>
+<h2>Guard</h2>
+<p *ngIf="!isAPosition('G')">- Empty slot -</p>
 <app-player-item *ngFor="let player of getPosition('G')" [player]="player" [players]="players"></app-player-item>
 
-<h2 *ngIf="isAPosition('F')">Forward</h2>
+<h2>Forward</h2>
+<p *ngIf="!isAPosition('F')">- Empty slot -</p>
 <app-player-item *ngFor="let player of getPosition('F')" [player]="player" [players]="players"></app-player-item>
 
-<h2 *ngIf="isAPosition('C')">Center</h2>
+<h2>Center</h2>
+<p *ngIf="!isAPosition('C')">- Empty slot -</p>
 <app-player-item *ngFor="let player of getPosition('C')" [player]="player" [players]="players"></app-player-item>
 
 <h2>Bench</h2>

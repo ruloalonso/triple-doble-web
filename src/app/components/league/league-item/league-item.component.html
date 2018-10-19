@@ -13,8 +13,8 @@
   <li *ngIf="isUser() && isDraft()"><p><a [routerLink]="['/leagues', league._id, 'draft']">Draft Room</a></p></li>
   <li *ngIf="isUser() && isSeason()"><p><a [routerLink]="['/leagues', league._id]">League Home</a></p></li>  
   <li *ngIf="!isUser() && isApplication()">
-    <input type="text" (focus)="onWritting()" [(ngModel)]="teamCity" placeholder="Team City">    
-    <input type="text" (focus)="onWritting()" [(ngModel)]="teamName" placeholder="Team Name">
+    <input style="max-width: 100px" type="text" (focus)="onWritting()" [(ngModel)]="teamCity" placeholder="Team City">    
+    <input style="max-width: 100px" type="text" (focus)="onWritting()" [(ngModel)]="teamName" placeholder="Team Name">
     <button (click)="joinLeague()">Join League</button>
   </li> 
 </ul>

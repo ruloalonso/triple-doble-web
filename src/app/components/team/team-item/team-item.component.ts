@@ -18,6 +18,7 @@ export class TeamItemComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      console.log(params);
       this.teamService.get(params.teamId)
         .subscribe((team: Team) => {
           this.team = team;

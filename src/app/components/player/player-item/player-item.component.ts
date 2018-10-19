@@ -27,10 +27,14 @@ export class PlayerItemComponent implements OnInit {
     return this.player.position !== 'B';
   }
 
+  isPlayingAs(position: string): boolean {
+    return this.player.position === position;
+  }
+
   isPosition(position: string): boolean {
     // console.log(position);
-    console.log(this.players);
-    console.log('is position', this.players.some(player => player.position === position));
+    // console.log(this.players.filter(player => player.position === position));
+    // console.log('is position', this.players.some(player => player.position === position));
     return this.players.some(player => player.position === position);
   }
 

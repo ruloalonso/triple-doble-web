@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { Team } from 'src/app/shared/models/team.model';
 import { Player } from 'src/app/shared/models/player.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-player-list',
@@ -11,6 +12,7 @@ import { Player } from 'src/app/shared/models/player.model';
 export class PlayerListComponent implements OnInit {
   @Input()team: Team;
   players: Array<Player>;
+  onPlayersChanges: Subscription;
 
   constructor(
     private playerService: PlayerService,
@@ -20,6 +22,11 @@ export class PlayerListComponent implements OnInit {
     this.playerService.team(this.team._id)
       .subscribe((players: Array<Player>) => {
         this.players = players;
+      });
+    this.onPlayersChanges = this.playerService.onPlayersChanges()
+      .subscribe((players: Array<Player>) => {
+        this.players = players;
+        console.log('player changes', this.players);
       });
   }
 
