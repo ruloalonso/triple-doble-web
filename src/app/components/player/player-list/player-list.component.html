@@ -1,3 +1,21 @@
 <div *ngIf="players">
-  <app-player-item *ngFor="let player of players" [player]="player"></app-player-item>
+
+
+
+<h2 *ngIf="isAPosition('G')">Guard</h2>
+<app-player-item *ngFor="let player of getPosition('G')" [player]="player" [players]="players"></app-player-item>
+
+<h2 *ngIf="isAPosition('F')">Forward</h2>
+<app-player-item *ngFor="let player of getPosition('F')" [player]="player" [players]="players"></app-player-item>
+
+<h2 *ngIf="isAPosition('C')">Center</h2>
+<app-player-item *ngFor="let player of getPosition('C')" [player]="player" [players]="players"></app-player-item>
+
+<h2>Bench</h2>
+<app-player-item *ngFor="let player of getPosition('B')" [player]="player" [players]="players"></app-player-item>
+
+</div>
+
+<div *ngIf="!players">
+  Loading...
 </div>

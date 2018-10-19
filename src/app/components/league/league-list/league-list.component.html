@@ -4,10 +4,10 @@
   <app-league-item (writting)="pollingUnsubscribe()" *ngFor="let league of leagues" [league]="league"></app-league-item>
 </div>
 
-<div>
-  <input type="text" [(ngModel)]="leagueName" placeholder="League Name">
-  <input type="text" [(ngModel)]="teamCity" placeholder="Team City">    
-  <input type="text" [(ngModel)]="teamName" placeholder="Team Name">
-  <button (click)="createLeague()">Create League</button>
-</div>
+<h5>Create league</h5>
+<input type="text" [(ngModel)]="leagueName" placeholder="League Name"><br>
+<input type="text" [(ngModel)]="teamCity" placeholder="Team City"><br>    
+<input type="text" [(ngModel)]="teamName" placeholder="Team Name"><br>
+<button (click)="createLeague()">Create and Join</button>
+
 

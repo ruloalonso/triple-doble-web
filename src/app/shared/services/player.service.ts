@@ -13,9 +13,6 @@ import { Player } from '../models/player.model';
 export class PlayerService extends BaseApiService {
   private static readonly PLAYER_API = `${BaseApiService.BASE_API}/players`;
 
-  // players: Array<Player> = [];
-  // playersSubject: Subject<Array<Player>> = new Subject();
-
   availablePlayers: Array<Player> = [];
   availablePlayersSubject: Subject<Array<Player>> = new Subject();
 
@@ -25,18 +22,13 @@ export class PlayerService extends BaseApiService {
     super();
   }
 
-  // list(): Observable<Array<Player> | ApiError> {
-  //   return this.http.get<Array<Player>>(PlayerService.PLAYER_API, BaseApiService.defaultOptions)
-  //     .pipe(
-  //       map((players: Array<Player>) => {
-  //         players = players.map(league => Object.assign(new Player(), league));
-  //         this.players = players;
-  //         this.notifyPlayersChanges();
-  //         return players;
-  //       }),
-  //       catchError(this.handleError)
-  //     );
-  // }
+  private notifyAvailablePlayersChanges(): void {
+    this.availablePlayersSubject.next(this.availablePlayers);
+  }
+
+  onAvailablePlayersChanges(): Observable<Array<Player>> {
+    return this.availablePlayersSubject.asObservable();
+  }
 
   listAvailable(): Observable<Array<Player> | ApiError> {
     let params = new HttpParams();
@@ -83,11 +75,15 @@ export class PlayerService extends BaseApiService {
       );
   }
 
-  private notifyAvailablePlayersChanges(): void {
-    this.availablePlayersSubject.next(this.availablePlayers);
-  }
-
-  onAvailablePlayersChanges(): Observable<Array<Player>> {
-    return this.availablePlayersSubject.asObservable();
+  setPosition(player: Player, position: string) {
+    return this.http.post<Player>(`${PlayerService.PLAYER_API}/${player._id}/position/${position}`, BaseApiService.defaultOptions, { withCredentials: true })
+      .pipe(
+        map((player: Player) => {
+          // this.players = this.availablePlayers.filter(newPlayer => newPlayer._id !== player._id);
+          // this.notifyAvailablePlayersChanges();
+          return player;
+        }),
+        catchError(this.handleError)
+      );
   }
 }

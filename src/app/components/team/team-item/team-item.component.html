@@ -1,2 +1,3 @@
-<h2>League // {{team.name}}</h2>
+<h2>{{team.city}} {{team.name}}</h2>
+<p>Manager: {{team.owner.name}}</p>
 <app-player-list *ngIf="team" [team]="team"></app-player-list>

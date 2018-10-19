@@ -1,10 +1,12 @@
+import { Team } from './team.model';
+
 export class Player {
   _id: string;
   playerId: string;
   firstName: string;
   lastName: string;
   team: string;
-  owner?: string;
+  owner?: Team;
   image?: string;
-  //contracts: [number];
+  position: string;
 }

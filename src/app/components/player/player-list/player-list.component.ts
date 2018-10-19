@@ -23,4 +23,20 @@ export class PlayerListComponent implements OnInit {
       });
   }
 
+  getPosition(position: string) {
+    this.players.forEach(player => {
+      if (player.owner._id === this.team._id) {
+        return {
+          player: player,
+          isOwner: true
+        };
+      }
+    });
+    return this.players.filter(player => player.position === position);
+  }
+
+  isAPosition(position: string) {
+    return this.players.some(player => player.position === position);
+  }
+
 }
