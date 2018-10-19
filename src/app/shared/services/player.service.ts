@@ -75,6 +75,18 @@ export class PlayerService extends BaseApiService {
       );
   }
 
+  cut(playerId: string): Observable<Player | ApiError> {
+    return this.http.post<Player>(`${PlayerService.PLAYER_API}/${playerId}/cut`, BaseApiService.defaultOptions, { withCredentials: true })
+      .pipe(
+        map((player: Player) => {
+          this.availablePlayers.push(player);
+          this.notifyAvailablePlayersChanges();
+          return player;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
   team(id: string): Observable<Array<Player> | ApiError> {
     return this.http.get<Array<Player>>(`${PlayerService.PLAYER_API}/?team=${id}`, BaseApiService.defaultOptions)
       .pipe(
