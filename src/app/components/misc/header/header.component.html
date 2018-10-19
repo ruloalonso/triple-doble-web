@@ -43,7 +43,7 @@
   <a mat-list-item [routerLink]="['/leagues', league._id]" *ngIf="isSeason() && user">League</a>
   <a mat-list-item [routerLink]="['/teams', team._id]" *ngIf="isSeason() && user">My team</a>
   <a mat-list-item [routerLink]="['/leagues', league._id, 'marketplace']" *ngIf="isSeason() && user">Marketplace</a>
-  <p mat-list-item><button mat-raised-button color="warn" *ngIf="user" (click)="onClickLogout()">Logout</button></p>
+  <a mat-list-item><button mat-raised-button color="warn" *ngIf="user" (click)="onClickLogout()">Logout</button></a>
   
 </mat-nav-list>
 
