@@ -6,4 +6,5 @@ export class Team {
   city: string;
   owner: User;
   league: string;
+  fp: number;
 }

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ApiError } from '../models/api-error.model';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+import { Team } from '../models/team.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,20 @@ export class PlayService extends BaseApiService {
     super();
   }
 
-  position(player: Player): Observable<Array<Play> | ApiError> {
-    return this.http.get<Array<Play>>(`${PlayService.PLAY_API}/${player._id}`, BaseApiService.defaultOptions)
+  player(player: Player): Observable<Array<Play> | ApiError> {
+    return this.http.get<Array<Play>>(`${PlayService.PLAY_API}/?player=${player._id}`, BaseApiService.defaultOptions)
       .pipe(
         map((plays: Array<Play>) => {
-          console.log(plays);
-          // plays = plays.filter(team => team.owner.id === this.sessionService.user.id)[0];
+          return plays;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  team(team: Team): Observable<Array<Play> | ApiError> {
+    return this.http.get<Array<Play>>(`${PlayService.PLAY_API}/?team=${team._id}`, BaseApiService.defaultOptions)
+      .pipe(
+        map((plays: Array<Play>) => {
           return plays;
         }),
         catchError(this.handleError)

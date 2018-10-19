@@ -56,13 +56,12 @@ export class PlayerItemComponent implements OnInit {
   }
 
   getPlays() {
-    this.playService.position(this.player)
+    this.playService.player(this.player)
       .subscribe((plays: Array<Play>) => {
         this.plays = plays;
         this.assists = plays.reduce((acc, curr) => acc + curr.as, 0);
         this.pts = plays.reduce((acc, curr) => acc + curr.pts, 0);
         this.reb = plays.reduce((acc, curr) => acc + curr.reb, 0);
-        console.log(this.assists);
         return plays;
       });
   }

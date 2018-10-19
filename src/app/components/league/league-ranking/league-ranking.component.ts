@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from 'src/app/shared/models/team.model';
 import { TeamService } from 'src/app/shared/services/team.service';
 import { ActivatedRoute } from '@angular/router';
+import { PlayService } from 'src/app/shared/services/play.service';
 
 @Component({
   selector: 'app-league-ranking',
