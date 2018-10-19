@@ -2,7 +2,7 @@ import { GlobalErrorHandlerService } from './shared/handlers/global-error-handle
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -23,6 +23,11 @@ import { PlayerItemComponent } from './components/player/player-item/player-item
 import { TeamLineupComponent } from './components/team/team-lineup/team-lineup.component';
 import { LeagueRankingComponent } from './components/league/league-ranking/league-ranking.component';
 import { LeagueMarketplaceComponent } from './components/league/league-marketplace/league-marketplace.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormExampleComponent } from './form-example/form-example.component';
+import { MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { NavExampleComponent } from './nav-example/nav-example.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -43,12 +48,26 @@ import { LeagueMarketplaceComponent } from './components/league/league-marketpla
     TeamLineupComponent,
     LeagueRankingComponent,
     LeagueMarketplaceComponent,
+    FormExampleComponent,
+    NavExampleComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [
     {
