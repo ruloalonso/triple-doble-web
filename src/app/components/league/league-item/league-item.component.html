@@ -1,4 +1,4 @@
-<h3>{{league.name}}</h3>
+<!-- <h3>{{league.name}}</h3>
 <ul>
   <li *ngIf="!isAdmin()"><p>Comissioner: {{league.admin.name}}</p></li>
   <li *ngIf="isAdmin()"><p>You are the commisioner!</p></li>
@@ -17,7 +17,43 @@
     <input style="max-width: 100px" type="text" (focus)="onWritting()" [(ngModel)]="teamName" placeholder="Team Name">
     <button (click)="joinLeague()">Join League</button>
   </li> 
-</ul>
+</ul> -->
+
+<mat-card class="dashboard-card">
+  <mat-card-header>
+    <mat-card-title>
+      {{league.name}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="dashboard-card-content">
+    <span *ngIf="!isAdmin()">Comissioner: {{league.admin.name}}</span>
+    <span *ngIf="isAdmin()"><br>You are the commisioner!</span>
+    <span><br>Status: {{league.status}}</span>
+    <span *ngIf="isApplication() && !draftReady()"><br>{{league.maxUsers - league.users.length}} users left to start the Draft</span>
+    <span *ngIf="isApplication() && draftReady()"><br><b>DRAFT IS READY TO START!!!</b></span>
+    <span *ngIf="isDraft()"><br>Round: #{{league.round}} of {{league.maxPlayers}}</span>
+    <span *ngIf="isDraft()"><br>Turn #{{league?.turn}} of {{league?.maxUsers}}</span>
+    <span *ngIf="isDraft() && isTurn()"><br><b>IT'S YOUR TURN!!!</b></span>
+    <span *ngIf="isDraft() && !isTurn()"><br>It's {{userTurn()}}'s turn</span>
+    <span *ngIf="isUser() && isDraft()"><br><a [routerLink]="['/leagues', league._id, 'draft']">Draft Room</a></span>    
+    <span *ngIf="!isUser() && isApplication()">
+      <!-- <input matInput style="max-width: 100px" type="text" (focus)="onWritting()" [(ngModel)]="teamCity" placeholder="Team City">    
+      <input matInput style="max-width: 100px" type="text" (focus)="onWritting()" [(ngModel)]="teamName" placeholder="Team Name"> -->
+      <mat-form-field class="full-width">
+          <input matInput (focus)="onWritting()" [(ngModel)]="teamCity" placeholder="Team City">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput (focus)="onWritting()" [(ngModel)]="teamName" placeholder="Team Name">
+          </mat-form-field>
+      <button mat-raised-button color="primary" (click)="joinLeague()">Join League</button>
+    </span> 
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" *ngIf="isUser() && isSeason()" [routerLink]="['/leagues', league._id]">League Home</button>
+    <button mat-raised-button color="primary" *ngIf="isUser() && isApplication()" [routerLink]="['/leagues', league._id, 'lobby']">Draft Lobby</button>
+    <button mat-raised-button color="primary" *ngIf="isUser() && isDraft()" [routerLink]="['/leagues', league._id, 'draft']">League Home</button>
+  </mat-card-actions>
+</mat-card>
 
 
 

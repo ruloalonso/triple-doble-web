@@ -1,13 +1,36 @@
+<h3>Leagues</h3>
 
-<div>
-  <h2>Leagues</h2>
-  <app-league-item (writting)="pollingUnsubscribe()" *ngFor="let league of leagues" [league]="league"></app-league-item>
+<div class="basic-container">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Create
+        </mat-panel-title>
+        <mat-panel-description>
+          Type league and team info
+        </mat-panel-description>
+      </mat-expansion-panel-header>  
+      <mat-form-field>
+        <input matInput [(ngModel)]="leagueName" placeholder="League Name">
+      </mat-form-field>  
+      <mat-form-field>
+        <input matInput [(ngModel)]="teamCity" placeholder="Team City">
+      </mat-form-field>  
+      <mat-form-field>
+        <input matInput [(ngModel)]="teamName" placeholder="Team Name">
+      </mat-form-field>  
+      <mat-action-row>
+        <button mat-button color="primary" (click)="createLeague()">Create and Join</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
 
-<h5>Create league</h5>
-<input type="text" [(ngModel)]="leagueName" placeholder="League Name"><br>
-<input type="text" [(ngModel)]="teamCity" placeholder="Team City"><br>    
-<input type="text" [(ngModel)]="teamName" placeholder="Team Name"><br>
-<button (click)="createLeague()">Create and Join</button>
+<mat-grid-list cols="2" rowHeight="300px">
+  <mat-grid-tile *ngFor="let league of leagues">
+    <app-league-item (writting)="pollingUnsubscribe()" [league]="league"></app-league-item>
+  </mat-grid-tile>
+</mat-grid-list>
 
 

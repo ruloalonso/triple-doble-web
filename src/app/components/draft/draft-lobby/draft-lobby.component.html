@@ -15,3 +15,5 @@
 <h5 *ngIf="(league.users.length === league.maxUsers) && !isAdmin()"><p>Wait for the Commisioner to start the Draft...</p></h5> 
 
 <button *ngIf="league.users.length === league.maxUsers && isAdmin()" (click)="startDraft()">Start Draft</button>
+
+<app-table-example></app-table-example>

@@ -68,8 +68,8 @@ export class LeagueItemComponent implements OnInit {
 
   draftReady(): boolean {
     return this.league.maxUsers === this.league.users.length;
-  } 
-  
+  }
+
   onWritting(): void {
     this.writting.emit();
   }

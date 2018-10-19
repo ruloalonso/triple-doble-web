@@ -25,9 +25,25 @@ import { LeagueRankingComponent } from './components/league/league-ranking/leagu
 import { LeagueMarketplaceComponent } from './components/league/league-marketplace/league-marketplace.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormExampleComponent } from './form-example/form-example.component';
-import { MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatCardModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatCardModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatNativeDateModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatMenuModule,
+  MatChipsModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { NavExampleComponent } from './nav-example/nav-example.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { DashboardExampleComponent } from './dashboard-example/dashboard-example.component';
+import { TableExampleComponent } from './table-example/table-example.component';
 
 
 @NgModule({
@@ -50,6 +66,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     LeagueMarketplaceComponent,
     FormExampleComponent,
     NavExampleComponent,
+    DashboardExampleComponent,
+    TableExampleComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +85,15 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatNativeDateModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatChipsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     {

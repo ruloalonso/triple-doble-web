@@ -43,9 +43,6 @@ export class LeagueListComponent implements OnInit {
     this.onLeagueChanges = this.leagueService.onLeaguesChanges()
       .subscribe((leagues: Array<League>) => {
         this.leagues = leagues;
-        //TODO: league pipe
-        // this.userLeagues = leagues.filter(league => league.users.includes(this.sessionService.user.id));
-        // this.otherLeagues = leagues.filter(league => !league.users.includes(this.sessionService.user.id));
       });
   }
 

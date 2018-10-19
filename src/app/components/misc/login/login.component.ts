@@ -26,9 +26,7 @@ export class LoginComponent {
   ) {}
 
   onSubmit(): void {
-    console.log('hola!');
     if (this.loginForm.valid) {
-      console.log(this.loginForm);
       this.sessionService.authenticate(this.loginForm.value)
         .subscribe(
           () => {
