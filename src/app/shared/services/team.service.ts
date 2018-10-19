@@ -4,7 +4,7 @@ import { BaseApiService } from './base-api.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { SessionService } from './session.service';
 
 @Injectable({
@@ -42,7 +42,6 @@ export class TeamService extends BaseApiService {
       .pipe(
         map((team: Team) => {
           if (team.owner.id === this.sessionService.user.id) {
-            console.log('team-service team get', team);
             this.team = team;
             this.notifyTeamChanges();
           }

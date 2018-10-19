@@ -26,7 +26,6 @@ export class PlayerListComponent implements OnInit {
     this.onPlayersChanges = this.playerService.onPlayersChanges()
       .subscribe((players: Array<Player>) => {
         this.players = players;
-        console.log('player changes', this.players);
       });
   }
 
