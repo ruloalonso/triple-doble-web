@@ -9,4 +9,5 @@ export class Player {
   owner?: Team;
   image?: string;
   position: string;
+  fp: number;
 }
