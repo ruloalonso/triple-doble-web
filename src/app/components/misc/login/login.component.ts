@@ -2,7 +2,7 @@ import { SessionService } from './../../../shared/services/session.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../shared/models/user.model';
 import { ApiError } from '../../../shared/models/api-error.model';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,17 +11,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  user: User = new User();
+  loginForm = this.fb.group({
+    email: [null, Validators.compose([
+      Validators.required, Validators.email])
+    ],
+    password: [null, Validators.required]
+  });
   apiError: ApiError;
 
-  constructor(private sessionService: SessionService, private router: Router) {}
+  constructor(
+    private sessionService: SessionService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
-  onSubmitLogin(loginForm: FormGroup): void {
-    if (loginForm.valid) {
-      this.sessionService.authenticate(this.user)
+  onSubmit(): void {
+    console.log('hola!');
+    if (this.loginForm.valid) {
+      console.log(this.loginForm);
+      this.sessionService.authenticate(this.loginForm.value)
         .subscribe(
           () => {
-            loginForm.reset();
+            this.loginForm.reset();
             this.router.navigate(['/leagues']);
           },
           (error: ApiError) => this.apiError = error
