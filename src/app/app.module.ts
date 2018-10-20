@@ -39,7 +39,11 @@ import {
   MatExpansionModule,
   MatGridListModule,
   MatMenuModule,
-  MatChipsModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+  MatChipsModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatAutocompleteModule } from '@angular/material';
 import { NavExampleComponent } from './nav-example/nav-example.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DashboardExampleComponent } from './dashboard-example/dashboard-example.component';
@@ -93,7 +97,8 @@ import { TableExampleComponent } from './table-example/table-example.component';
     MatChipsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatAutocompleteModule
   ],
   providers: [
     {

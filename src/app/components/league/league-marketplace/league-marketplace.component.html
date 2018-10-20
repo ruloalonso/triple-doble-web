@@ -1,26 +1,27 @@
-<h3>Cut player</h3>
-
-<select [(ngModel)]="playerIdToCut">
-  <option *ngFor="let player of players" [value]="player._id">
-    {{player.firstName}} {{player.lastName}}
-  </option>
-</select>
-
-<button (click)="cutPlayer()">Cut</button>
-<span> {{cutCheck}}</span>
-
-
-
 <h3>Free agency</h3>
-<select [(ngModel)]="freeAgentId">
-    <option *ngFor="let player of freeAgents" [value]="player._id">
+<mat-form-field>
+  <mat-select [(ngModel)]="freeAgentId">
+    <mat-option *ngFor="let player of freeAgents" [value]="player._id">
       {{player.firstName}} {{player.lastName}}
-    </option>
-</select>
-<button *ngIf="hasSpace()" (click)="signPlayer()">Sign</button>
-<span> {{signCheck}}</span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div>
+  <button mat-raised-button color="accent" *ngIf="hasSpace()" (click)="signPlayer()">Sign</button>
+  <span> {{signCheck}}</span>
+</div>
 <p *ngIf="!hasSpace()">You must cut a player befor signing new one!</p>
-
-
-
+<h3>Cut player</h3>
+<mat-form-field>
+  <mat-select [(ngModel)]="playerIdToCut">
+    <mat-option *ngFor="let player of players" [value]="player._id">
+      {{player.firstName}} {{player.lastName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div>
+  <button mat-raised-button color="warn" (click)="cutPlayer()">Cut</button>
+  <span> {{cutCheck}}</span>
+</div>
 <h3>Trade players</h3>
+<p>- Under construction -</p>

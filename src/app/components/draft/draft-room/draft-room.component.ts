@@ -1,4 +1,4 @@
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { startWith } from 'rxjs/operators';
 import { interval } from 'rxjs/internal/observable/interval';
 import { Component, OnInit } from '@angular/core';
@@ -7,9 +7,10 @@ import { ActivatedRoute } from '@angular/router';
 import { LeagueService } from 'src/app/shared/services/league.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { Player } from 'src/app/shared/models/player.model';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { PlayerService } from 'src/app/shared/services/player.service';
 import { User } from 'src/app/shared/models/user.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-draft-room',
@@ -25,8 +26,9 @@ export class DraftRoomComponent implements OnInit {
   onAvailablePlayersChanges: Subscription;
   onLeagueChanges: Subscription;
   pollingIntervalSubscription: Subscription;
-
+  filteredPlayers: Observable<Player[]>;
   selectedPlayer: any;
+  myControl = new FormControl();
 
   constructor(
     private route: ActivatedRoute,
@@ -71,6 +73,11 @@ export class DraftRoomComponent implements OnInit {
           }
         });
       });
+    this.filteredPlayers = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
   }
 
   turn(): User {
@@ -82,9 +89,11 @@ export class DraftRoomComponent implements OnInit {
   }
 
   pickPlayer() {
-    this.playerService.sign(this.selectedPlayer, this.league._id)
+    console.log(this.myControl.value);
+    this.playerService.sign(this.myControl.value._id, this.league._id)
       .subscribe(player => {
         this.passTurn();
+        this.myControl.reset();
       });
   }
 
@@ -104,6 +113,14 @@ export class DraftRoomComponent implements OnInit {
   }
 
   selectChange(): void {
+  }
+
+  private _filter(name: string): Player[] {
+    const filterValue = name.toLowerCase();
+
+    return this.players.filter(
+      player => player.firstName.toLowerCase().indexOf(filterValue) === 0 || player.lastName.toLowerCase().indexOf(filterValue) === 0
+    );
   }
 
 }

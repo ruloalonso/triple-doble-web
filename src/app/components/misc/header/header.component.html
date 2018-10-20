@@ -1,41 +1,3 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
-  <div class="container">
-    <a class="navbar-brand" href="javascript:;">Triple Doble</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/leagues']">Home</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" *ngIf="!user">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav my-2 my-lg-0" *ngIf="user">
-        <li class="nav-item">
-          <a class="nav-link">Random Manager</a></li>
-        <li class="nav-item" routerLinkActive="active">
-          <button class="btn btn-link" (click)="onClickLogout()">Logout</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav> -->
-
-<!-- <span *ngIf="!user"> // <a class="nav-link" [routerLink]="['/login']">Login</a></span>  
-<span *ngIf="!user"> // <a class="nav-link" [routerLink]="['/signup']">Signup</a></span>
-
-<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id]">League</a></span>
-<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/teams', team._id]">My team</a></span>
-<span *ngIf="isSeason()"> // <a class="nav-link" [routerLink]="['/leagues', league._id, 'marketplace']">Marketplace</a></span>
-
-<a *ngIf="user" class="nav-link"> -- {{user.name}} -- </a> 
-<button *ngIf="user" class="btn btn-link" (click)="onClickLogout()">Logout</button> -->
-
 <mat-nav-list>
   <a mat-list-item [routerLink]="['/leagues']">Home</a>
   <a mat-list-item [routerLink]="['/login']" *ngIf="!user">Login</a>
@@ -43,10 +5,5 @@
   <a mat-list-item [routerLink]="['/leagues', league._id]" *ngIf="isSeason() && user">League</a>
   <a mat-list-item [routerLink]="['/teams', team._id]" *ngIf="isSeason() && user">My team</a>
   <a mat-list-item [routerLink]="['/leagues', league._id, 'marketplace']" *ngIf="isSeason() && user">Marketplace</a>
-  <a mat-list-item><button mat-raised-button color="warn" *ngIf="user" (click)="onClickLogout()">Logout</button></a>
-  
+  <a mat-list-item><button mat-raised-button color="warn" *ngIf="user" (click)="onClickLogout()">Logout</button></a>  
 </mat-nav-list>
-
-
-
-

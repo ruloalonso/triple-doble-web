@@ -1,6 +1,6 @@
 <div>
-  <p *ngFor="let team of teams; index as i"> 
+  <p *ngFor="let team of teams.sort(compare); index as i"> 
     #{{i+1}}: <a class="nav-link" [routerLink]="['/teams', team._id]">{{team.city}} {{team.name}}</a> @{{team.owner.name}}<br>
     <small>Fantasy Points: {{team.fp}}</small>
-    </p>
+  </p>
 </div>

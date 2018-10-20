@@ -18,10 +18,10 @@
 </div>
 
 <div *ngIf="isOwner()">   
-  <button *ngIf="!isPosition('G')" (click)="setPosition('G')">Guard</button>
-  <button *ngIf="!isPosition('F')" (click)="setPosition('F')">Forward</button>
-  <button *ngIf="!isPosition('C')" (click)="setPosition('C')">Center</button>
-  <button *ngIf="isPlaying()" (click)="setPosition('B')">Sit</button> 
+  <button mat-raised-button color="accent" *ngIf="!isPosition('G')" (click)="setPosition('G')">Guard</button>
+  <button mat-raised-button color="accent" *ngIf="!isPosition('F')" (click)="setPosition('F')">Forward</button>
+  <button mat-raised-button color="accent" *ngIf="!isPosition('C')" (click)="setPosition('C')">Center</button>
+  <button mat-raised-button color="warn" *ngIf="isPlaying()" (click)="setPosition('B')">Sit</button> 
 </div>
 
 

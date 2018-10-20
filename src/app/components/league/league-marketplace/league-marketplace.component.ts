@@ -5,7 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Team } from 'src/app/shared/models/team.model';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { Player } from 'src/app/shared/models/player.model';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-league-marketplace',
@@ -22,7 +24,8 @@ export class LeagueMarketplaceComponent implements OnInit {
   cutCheck: string;
   onPlayersChanges: Subscription;
   onAvailablePlayersChanges: Subscription;
-
+  filteredPlayers: Observable<Player[]>;
+  myControl = new FormControl();
 
   constructor(
     private playerService: PlayerService,
@@ -57,6 +60,11 @@ export class LeagueMarketplaceComponent implements OnInit {
             }
           });
         });
+        this.filteredPlayers = this.myControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
     });
   }
 
@@ -76,6 +84,14 @@ export class LeagueMarketplaceComponent implements OnInit {
 
   hasSpace() {
     return this.players.length < 4;
+  }
+
+  private _filter(name: string): Player[] {
+    const filterValue = name.toLowerCase();
+
+    return this.freeAgents.filter(
+      player => player.firstName.toLowerCase().indexOf(filterValue) === 0 || player.lastName.toLowerCase().indexOf(filterValue) === 0
+    );
   }
 
 }
